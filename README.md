@@ -28,7 +28,7 @@ This means that code should be commented with short, yet descriptive bits of tex
 
 For Class creations, we will be using NuPy docstrings to document our class structure. An Examble is below.
 
-`python
+```python
 """Gets and prints the spreadsheet's header columns
 
 Parameters
@@ -38,10 +38,10 @@ file_loc : str
 print_cols : bool, optional
     A flag used to print the columns to the console (default is False)
 
-Returns
+Return
 -------
 list
     a list of strings representing the header columns
 """
-`
+```
 
