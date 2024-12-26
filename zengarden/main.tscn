@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5hdr8u7n3880"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_i1gqj"]
+[ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="1_t76gv"]
+
+[sub_resource type="TileSet" id="TileSet_letmj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xg5l0"]
+size = Vector2(68, 69)
+
+[node name="Main" type="Node2D"]
+position = Vector2(429, 235)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = SubResource("TileSet_letmj")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_i1gqj")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(23, 16.625)
+scale = Vector2(0.0842391, 0.0680419)
+texture = ExtResource("1_t76gv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(23, 18)
+shape = SubResource("RectangleShape2D_xg5l0")
