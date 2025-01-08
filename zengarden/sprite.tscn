@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd6ccld67lmgj"]
+
+[ext_resource type="Script" path="res://sprite.gd" id="1_18nnd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_037ff"]
+
+[node name="Sprite" type="Node2D"]
+script = ExtResource("1_18nnd")
+
+[node name="Visual" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="Visual"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/Area2D"]
+shape = SubResource("RectangleShape2D_037ff")
+
+[connection signal="input_event" from="Visual/Area2D" to="." method="_on_area_2d_input_event"]
