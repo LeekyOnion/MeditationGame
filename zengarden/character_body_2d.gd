@@ -6,7 +6,7 @@ func _physics_process(delta):
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	
 	input_vector = input_vector.normalized()
-	print(input_vector)
+	#print(input_vector)
 	
 	if input_vector:
 		velocity = input_vector * 300
