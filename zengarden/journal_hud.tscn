@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkggtoaqt8akd"]
+
+[ext_resource type="Script" path="res://journal_hud.gd" id="1_ndg28"]
+
+[node name="JournalHUD" type="CanvasLayer"]
+script = ExtResource("1_ndg28")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.392157)
+
+[node name="ButtonContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -40.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CloseJournal" type="Button" parent="ColorRect/ButtonContainer"]
+layout_mode = 2
+text = "Close"
+
+[node name="TextContainer" type="MarginContainer" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -90.5
+offset_right = 90.5
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="JournalText" type="Label" parent="ColorRect/TextContainer"]
+layout_mode = 2
+text = "This is the Journal."
+horizontal_alignment = 1
+
+[connection signal="pressed" from="ColorRect/ButtonContainer/CloseJournal" to="." method="_close_journal"]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjndkfg7b5nx4"]
+
+[ext_resource type="Script" path="res://hud.gd" id="1_dsldu"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_dsldu")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -64.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="JournalButton" type="Button" parent="MarginContainer"]
+layout_mode = 2
+text = "Journal"
+
+[connection signal="pressed" from="MarginContainer/JournalButton" to="." method="_open_journal"]
