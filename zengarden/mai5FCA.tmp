@@ -6,9 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="1_t76gv"]
 [ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="2_owkh3"]
 [ext_resource type="Texture2D" uid="uid://m828uux4ahtx" path="res://ArtAssets/snake-plant-house-plant-PL112722.425.jpg" id="3_4af4b"]
+[ext_resource type="Script" path="res://sprite_2d.gd" id="4_to3d3"]
 [ext_resource type="PackedScene" uid="uid://cd6ccld67lmgj" path="res://sprite.tscn" id="5_fo4fq"]
 [ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="6_rcyg0"]
-[ext_resource type="Script" path="res://label_2.gd" id="9_aqdi6"]
 
 [sub_resource type="TileSet" id="TileSet_letmj"]
 tile_size = Vector2i(128, 128)
@@ -17,7 +17,6 @@ tile_size = Vector2i(128, 128)
 size = Vector2(68, 69)
 
 [node name="Main" type="Node2D"]
-position = Vector2(429, 212)
 script = ExtResource("1_mkidq")
 
 [node name="HUD" parent="." instance=ExtResource("1_ck0h1")]
@@ -30,9 +29,6 @@ tile_set = SubResource("TileSet_letmj")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 visible = false
-position = Vector2(10.7, 0)
-scale = Vector2(11.115, 11.115)
-disable_mode = 2
 script = ExtResource("1_i1gqj")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
@@ -49,6 +45,7 @@ visible = false
 position = Vector2(39, -111)
 scale = Vector2(0.193529, 0.165534)
 texture = ExtResource("3_4af4b")
+script = ExtResource("4_to3d3")
 
 [node name="DragableSprite" parent="." node_paths=PackedStringArray("tile_map") instance=ExtResource("5_fo4fq")]
 position = Vector2(166, 113)
@@ -56,14 +53,7 @@ _texture = ExtResource("6_rcyg0")
 tile_map = NodePath("../TileMap")
 
 [node name="Label" type="Label" parent="."]
-offset_left = 505.0
-offset_top = -204.0
-offset_right = 640.0
-offset_bottom = -160.0
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 618.0
-offset_top = 6.0
-offset_right = 658.0
-offset_bottom = 29.0
-script = ExtResource("9_aqdi6")
+offset_left = 947.0
+offset_top = 3.0
+offset_right = 1082.0
+offset_bottom = 47.0
