@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkggtoaqt8akd"]
+[gd_scene load_steps=3 format=3 uid="uid://bkggtoaqt8akd"]
 
 [ext_resource type="Script" path="res://journal_hud.gd" id="1_ndg28"]
+[ext_resource type="Script" path="res://save_entry.gd" id="2_1gxr5"]
 
 [node name="JournalHUD" type="CanvasLayer"]
 script = ExtResource("1_ndg28")
@@ -45,4 +46,37 @@ layout_mode = 2
 text = "This is the Journal."
 horizontal_alignment = 1
 
+[node name="SaveEntry" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_1gxr5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SaveEntry"]
+layout_mode = 0
+offset_left = 336.04
+offset_top = 280.0
+offset_right = 822.04
+offset_bottom = 501.0
+
+[node name="Save" type="Button" parent="SaveEntry/VBoxContainer"]
+layout_mode = 2
+tooltip_text = "Save
+"
+action_mode = 0
+text = "Save Entry
+"
+
+[node name="TextEdit" type="TextEdit" parent="SaveEntry/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "This is where you should put your journal entry"
+scroll_smooth = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SaveEntry/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
 [connection signal="pressed" from="ColorRect/ButtonContainer/CloseJournal" to="." method="_close_journal"]
+[connection signal="pressed" from="SaveEntry/VBoxContainer/Save" to="SaveEntry" method="_on_save_button_pressed"]
