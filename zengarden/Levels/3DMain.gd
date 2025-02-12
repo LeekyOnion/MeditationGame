@@ -16,11 +16,13 @@ func _input(event):
 		is_drawing = false
 		print("released")
 		
-	if event is InputEventMouseButton:
+	if is_drawing and event is InputEventMouseButton:
 		var new_uv = _get_sand_uv()
 		if new_uv != Vector2(-1,-1):
 			_paint_between(last_uv, new_uv)
 			last_uv = new_uv
+			
+		print("hello")
 
 func _paint_between(from_uv: Vector2, to_uv: Vector2):
 	
@@ -37,18 +39,23 @@ func _paint_between(from_uv: Vector2, to_uv: Vector2):
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	draw_image = Image.new()
-	draw_image.create(800, 800, false, Image.FORMAT_RGBA8)
-	draw_image.fill(Color(0,0,0,0))
+	draw_image= Image.create(80, 80, false, Image.FORMAT_RGBA8)
+	draw_image.fill(Color(1,1,0,0))
 	
 	draw_texture = ImageTexture.new()
-	draw_texture.create_from_image(draw_image)
+	draw_texture = ImageTexture.create_from_image(draw_image)
 	
 	var sand_mesh = get_node("SandMesh")
 	if sand_mesh:
+		print("sand mesh is real")
+		print(sand_mesh)
 		var sand_material = sand_mesh.material_override as ShaderMaterial
 			
 		if sand_material:
+			print("sand material is real")
 			sand_material.set_shader_parameter("draw_mask", draw_texture)
+		else:
+			print("Material does not exist")
 
 func _get_sand_uv() -> Vector2:
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -56,12 +63,13 @@ func _get_sand_uv() -> Vector2:
 	var ray_end = ray_start + $Camera3D.project_ray_normal(mouse_pos) * 1000
 	
 	$RayCast3D.global_transform.origin = ray_start
-	$RayCast3D.cast_to = ray_end - ray_start
+	$RayCast3D.target_position = ray_end - ray_start
 	$RayCast3D.force_raycast_update()
-	
-	if $RayCast3D.is_colliding() and $RayCast3D.get_collider() == $SandMesh:
-		var uv = $RayCast.get_collision_uv()
-		return uv
+	if $RayCast3D.is_colliding():
+		print("Colliding with: ", $RayCast3D.get_collider().name)
+		var collider = $RayCast3D.get_collider()
+		if collider == $SandMesh:
+			return $RayCast3D.get_collision_uv()
 	return Vector2(-1,-1)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
