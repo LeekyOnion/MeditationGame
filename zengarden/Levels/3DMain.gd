@@ -25,7 +25,6 @@ func _input(event):
 		print("hello")
 
 func _paint_between(from_uv: Vector2, to_uv: Vector2):
-	
 	var img_size = draw_image.get_size()
 	var from_pixel = Vector2(from_uv.x * img_size.x, from_uv.y * img_size.y)
 	var to_pixel = Vector2(to_uv.x * img_size.x, to_uv.y * img_size.y)
@@ -36,6 +35,7 @@ func _paint_between(from_uv: Vector2, to_uv: Vector2):
 	draw_image.unlock()
 	
 	draw_texture.set_data(draw_image)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	draw_image = Image.new()
@@ -65,12 +65,17 @@ func _get_sand_uv() -> Vector2:
 	$RayCast3D.global_transform.origin = ray_start
 	$RayCast3D.target_position = ray_end - ray_start
 	$RayCast3D.force_raycast_update()
+	
 	if $RayCast3D.is_colliding():
 		print("Colliding with: ", $RayCast3D.get_collider().name)
-		var collider = $RayCast3D.get_collider()
-		if collider == $SandMesh:
-			return $RayCast3D.get_collision_uv()
+		var collider = $RayCast3D.get_collider() as StaticBody3D
+		var mesh_inst = collider.get_parent() as MeshInstance3D
+		
+		if collider == $SandMesh/StaticBody3D:
+			return Vector2(mesh_inst.mesh.ARRAY_TEX_UV, mesh_inst.mesh.ARRAY_TEX_UV2)
+	
 	return Vector2(-1,-1)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
