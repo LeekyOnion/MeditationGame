@@ -6,6 +6,8 @@ var draw_texture: ImageTexture
 var is_drawing := false
 var last_uv := Vector2()
 
+
+
 func _input(event):
 	if event.is_action_pressed("click"):
 		is_drawing = true
@@ -29,12 +31,13 @@ func _paint_between(from_uv: Vector2, to_uv: Vector2):
 	var from_pixel = Vector2(from_uv.x * img_size.x, from_uv.y * img_size.y)
 	var to_pixel = Vector2(to_uv.x * img_size.x, to_uv.y * img_size.y)
 	
-	draw_image.lock()
-	draw_image.draw_line(from_pixel, to_pixel, Color(1,1,1),5)
+	#var uv = 
+	#draw_image.lock()
+	#draw_image.draw_line(from_pixel, to_pixel, Color(1,1,1),5)
 	
-	draw_image.unlock()
+	#draw_image.unlock()
 	
-	draw_texture.set_data(draw_image)
+	#draw_texture.set_data(draw_image)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -70,6 +73,7 @@ func _get_sand_uv() -> Vector2:
 		print("Colliding with: ", $RayCast3D.get_collider().name)
 		var collider = $RayCast3D.get_collider() as StaticBody3D
 		var mesh_inst = collider.get_parent() as MeshInstance3D
+		
 		
 		if collider == $SandMesh/StaticBody3D:
 			return Vector2(mesh_inst.mesh.ARRAY_TEX_UV, mesh_inst.mesh.ARRAY_TEX_UV2)
