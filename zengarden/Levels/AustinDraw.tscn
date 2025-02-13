@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://fts5457vhobt"]
+
+[ext_resource type="Script" path="res://austin_draw_test.gd" id="1_l8xga"]
+[ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="2_xoqdt"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vh25"]
+size = Vector3(2, 0.1, 2)
+
+[node name="AustinDraw" type="Node3D"]
+script = ExtResource("1_l8xga")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PlaneMesh_26sj0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_5vh25")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.939325, 1.95204)
+current = true
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+render_target_clear_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
+texture = ExtResource("2_xoqdt")
