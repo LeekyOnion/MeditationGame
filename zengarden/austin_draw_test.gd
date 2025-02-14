@@ -2,12 +2,14 @@ extends Node3D
 
 const RAY_LENGTH := 1000
 
-@onready var sprite := $SubViewport/Sprite2D as Sprite2D
+@onready var viewport := $SubViewportContainer/SubViewport as SubViewport
+@onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
 		var mouse_pos = get_mouse_world_position()
-		sprite.global_position = Vector2(mouse_pos.x, mouse_pos.y)
+		print(mouse_pos)
+		sprite.global_position = Vector2(mouse_pos.x, mouse_pos.z)
 
 func _do_raycast_on_mouse_position(collision_mask: int = 0b00000000_00000000_00000000_00000001):
 	# Raycast related code
@@ -39,3 +41,10 @@ func get_raycast_hit_object(collision_mask: int = 0b00000000_00000000_00000000_0
 	if raycast_result:
 		return raycast_result.collider
 	return null
+
+func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
+		else:
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS

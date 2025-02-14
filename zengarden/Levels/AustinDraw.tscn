@@ -1,17 +1,36 @@
-[gd_scene load_steps=5 format=3 uid="uid://fts5457vhobt"]
+[gd_scene load_steps=10 format=3 uid="uid://fts5457vhobt"]
 
 [ext_resource type="Script" path="res://austin_draw_test.gd" id="1_l8xga"]
-[ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="2_xoqdt"]
+[ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_nmte4"]
+[ext_resource type="Shader" path="res://ArtAssets/Shaders/Sand.gdshader" id="2_yaop5"]
+[ext_resource type="Texture2D" uid="uid://dpni7xv27k32k" path="res://ArtAssets/zen_sand.jpg" id="3_65nje"]
+[ext_resource type="Texture2D" uid="uid://dmaaawm8mk1op" path="res://ArtAssets/Textures/A_black_image.jpg" id="4_ge6fk"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_m61k4"]
+viewport_path = NodePath("SubViewportContainer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w280m"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("2_yaop5")
+shader_parameter/uv_scale = 1.0
+shader_parameter/base_height = 1.0
+shader_parameter/base_texture = ExtResource("3_65nje")
+shader_parameter/dark_texture = ExtResource("4_ge6fk")
+shader_parameter/draw_mask = SubResource("ViewportTexture_m61k4")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
+material = SubResource("ShaderMaterial_w280m")
+size = Vector2(128, 128)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5vh25"]
-size = Vector3(2, 0.1, 2)
+size = Vector3(128, 0.1, 128)
 
 [node name="AustinDraw" type="Node3D"]
 script = ExtResource("1_l8xga")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
 mesh = SubResource("PlaneMesh_26sj0")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
@@ -19,13 +38,26 @@ mesh = SubResource("PlaneMesh_26sj0")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("BoxShape3D_5vh25")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0.939325, 1.95204)
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 51.9507, 98.1102)
 current = true
 
-[node name="SubViewport" type="SubViewport" parent="."]
-transparent_bg = true
-render_target_clear_mode = 2
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Sprite2D" type="Sprite2D" parent="SubViewport"]
-texture = ExtResource("2_xoqdt")
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+handle_input_locally = false
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(32, 32)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_nmte4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.673825, 0.738891, 0, -0.738891, 0.673825, 61.8754, 39.1331, 56.5474)
+
+[connection signal="input_event" from="MeshInstance3D/StaticBody3D" to="." method="_on_mouse_clicked"]

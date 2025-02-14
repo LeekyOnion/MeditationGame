@@ -8,6 +8,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jbdqv"]
 render_priority = 0
 shader = ExtResource("3_qdrgi")
+shader_parameter/uv_scale = 1.0
+shader_parameter/base_height = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_h1rbg"]
 

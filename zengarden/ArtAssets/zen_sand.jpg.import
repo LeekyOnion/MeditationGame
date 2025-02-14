@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmaaawm8mk1op"
-path.s3tc="res://.godot/imported/A_black_image.jpg-a1fcb553d87ed26f07f076bf939d4f47.s3tc.ctex"
+uid="uid://dpni7xv27k32k"
+path.s3tc="res://.godot/imported/zen_sand.jpg-ada573d48693df40bbbc7292be507f32.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ArtAssets/Textures/A_black_image.jpg"
-dest_files=["res://.godot/imported/A_black_image.jpg-a1fcb553d87ed26f07f076bf939d4f47.s3tc.ctex"]
+source_file="res://ArtAssets/zen_sand.jpg"
+dest_files=["res://.godot/imported/zen_sand.jpg-ada573d48693df40bbbc7292be507f32.s3tc.ctex"]
 
 [params]
 
