@@ -6,10 +6,10 @@
 [ext_resource type="Texture2D" uid="uid://dpni7xv27k32k" path="res://ArtAssets/zen_sand.jpg" id="3_65nje"]
 [ext_resource type="Texture2D" uid="uid://dmaaawm8mk1op" path="res://ArtAssets/Textures/A_black_image.jpg" id="4_ge6fk"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_m61k4"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_5vn3l"]
 viewport_path = NodePath("SubViewportContainer/SubViewport")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_w280m"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bq3k"]
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("2_yaop5")
@@ -17,10 +17,10 @@ shader_parameter/uv_scale = 1.0
 shader_parameter/base_height = 1.0
 shader_parameter/base_texture = ExtResource("3_65nje")
 shader_parameter/dark_texture = ExtResource("4_ge6fk")
-shader_parameter/draw_mask = SubResource("ViewportTexture_m61k4")
+shader_parameter/draw_mask = SubResource("ViewportTexture_5vn3l")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
-material = SubResource("ShaderMaterial_w280m")
+material = SubResource("ShaderMaterial_1bq3k")
 size = Vector2(128, 128)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5vh25"]
