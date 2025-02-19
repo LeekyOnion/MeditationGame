@@ -24,7 +24,7 @@ void fragment() {
 	float mask = COLOR.r;
 	mask *= texture(draw_mask, UV).r;
 	
-	//ALBEDO = mix(base_a, dark_a, mask);
+	// ALBEDO = mix(base_a, dark_a, mask);
 	ALBEDO = texture(draw_mask, UV).rgb;
 }
 
