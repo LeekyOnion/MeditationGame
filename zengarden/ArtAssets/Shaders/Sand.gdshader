@@ -20,12 +20,16 @@ void fragment() {
 	vec2 uv = UV * uv_scale;
 	vec3 base_a = texture(base_texture, uv).rgb;
 	vec3 dark_a = texture(dark_texture, uv).rgb;
+	vec3 mask_a = texture(draw_mask, uv).rgb;
 	
 	float mask = COLOR.r;
 	mask *= texture(draw_mask, UV).r;
 	
-	// ALBEDO = mix(base_a, dark_a, mask);
-	ALBEDO = texture(draw_mask, UV).rgb;
+	ALBEDO = mix(base_a, dark_a, mask_a).rgb;
+	
+	
+	//ALBEDO = mix(base_a, dark_a, mask);
+	//ALBEDO = texture(draw_mask, UV).rgb;
 }
 
 //void light() {

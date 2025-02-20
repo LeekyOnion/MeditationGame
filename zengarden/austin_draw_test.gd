@@ -4,22 +4,22 @@ const RAY_LENGTH := 1000
 @onready var shader = load("res://ArtAssets/Shaders/Sand.gdshader") as Shader
 @onready var viewport := $SubViewportContainer/SubViewport as SubViewport
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
-@onready var mesh := $MeshInstance3D as MeshInstance3D
+@export var mesh : MeshInstance3D
 
-var material : StandardMaterial3D
+var material : ShaderMaterial
 
 func _ready() -> void:
-	if shader != null and viewport != null:
-		#shader.set_shader_parameter("draw_mask", viewport.get_texture())
-		print(shader.get_shader_uniform_list())
+	material = mesh.get_active_material(0) as ShaderMaterial
+	if material:
+		material.set_shader_parameter("draw_mask", viewport.get_texture())
 	
-	if viewport != null:
+	'''if viewport != null:
 		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
-		material = mesh.get_surface_override_material(0)
-		if not material:
-			material = StandardMaterial3D.new()
-			mesh.set_surface_override_material(0, material)
-		material.albedo_texture = viewport.get_texture()
+		var draw_material = mesh.get_surface_override_material(0)
+		if not draw_material:
+			draw_material = StandardMaterial3D.new()
+			mesh.set_surface_override_material(0, draw_material)
+		draw_material.albedo_texture = viewport.get_texture()'''
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
@@ -63,6 +63,6 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 		if event.pressed:
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
 		else:
-			await RenderingServer.frame_post_draw
-			var tex = ImageTexture.create_from_image(viewport.get_texture().get_image()) as ImageTexture
+			material.set_shader_parameter("draw_mask", viewport.get_texture())
+			#var tex = ImageTexture.create_from_image(viewport.get_texture().get_image()) as ImageTexture
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
