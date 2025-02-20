@@ -6,18 +6,26 @@ const RAY_LENGTH := 1000
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @onready var mesh := $MeshInstance3D as MeshInstance3D
 
+var material : StandardMaterial3D
+
 func _ready() -> void:
 	if shader != null and viewport != null:
 		#shader.set_shader_parameter("draw_mask", viewport.get_texture())
 		print(shader.get_shader_uniform_list())
-	'''if mesh != null and viewport != null:
-		mesh.get_surface_override_material(0).albedo_texture = viewport.get_texture()'''
+	
+	if viewport != null:
+		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+		material = mesh.get_surface_override_material(0)
+		if not material:
+			material = StandardMaterial3D.new()
+			mesh.set_surface_override_material(0, material)
+		material.albedo_texture = viewport.get_texture()
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
 		var mouse_pos = get_mouse_world_position()
 		#print(mouse_pos)
-		sprite.global_position = Vector2(mouse_pos.x, mouse_pos.z)
+		sprite.global_position = Vector2(mouse_pos.x * 8, mouse_pos.z * 8)
 
 func _do_raycast_on_mouse_position(collision_mask: int = 0b00000000_00000000_00000000_00000001):
 	# Raycast related code
@@ -55,6 +63,6 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 		if event.pressed:
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
 		else:
+			await RenderingServer.frame_post_draw
 			var tex = ImageTexture.create_from_image(viewport.get_texture().get_image()) as ImageTexture
-			print(mesh.get_surface_override_material_count())
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
