@@ -1,26 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://fts5457vhobt"]
+[gd_scene load_steps=5 format=3 uid="uid://fts5457vhobt"]
 
 [ext_resource type="Script" path="res://austin_draw_test.gd" id="1_l8xga"]
 [ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_nmte4"]
-[ext_resource type="Shader" path="res://ArtAssets/Shaders/Sand.gdshader" id="2_yaop5"]
-[ext_resource type="Texture2D" uid="uid://dpni7xv27k32k" path="res://ArtAssets/zen_sand.jpg" id="3_65nje"]
-[ext_resource type="Texture2D" uid="uid://dmaaawm8mk1op" path="res://ArtAssets/Textures/A_black_image.jpg" id="4_ge6fk"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_dnn2o"]
-viewport_path = NodePath("SubViewportContainer/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1bq3k"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("2_yaop5")
-shader_parameter/uv_scale = 1.0
-shader_parameter/base_height = 1.0
-shader_parameter/base_texture = ExtResource("3_65nje")
-shader_parameter/dark_texture = ExtResource("4_ge6fk")
-shader_parameter/draw_mask = SubResource("ViewportTexture_dnn2o")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
-material = SubResource("ShaderMaterial_1bq3k")
 size = Vector2(128, 128)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5vh25"]
@@ -53,7 +36,7 @@ offset_bottom = 40.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1024, 1024)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(32, 32)

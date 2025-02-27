@@ -6,12 +6,13 @@ const RAY_LENGTH := 1000
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @export var mesh : MeshInstance3D
 
-var material : ShaderMaterial
+@onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
+#var material : ShaderMaterial
 
 func _ready() -> void:
-	material = mesh.get_active_material(0) as ShaderMaterial
+	'''material = mesh.get_active_material(0) as ShaderMaterial
 	if material:
-		material.set_shader_parameter("draw_mask", viewport.get_texture())
+		material.set_shader_parameter("draw_mask", viewport.get_texture())'''
 	
 	'''if viewport != null:
 		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -20,6 +21,11 @@ func _ready() -> void:
 			draw_material = StandardMaterial3D.new()
 			mesh.set_surface_override_material(0, draw_material)
 		draw_material.albedo_texture = viewport.get_texture()'''
+	
+	if mesh != null and sand_tex != null:
+		var sand_material = StandardMaterial3D.new()
+		sand_material.albedo_texture = sand_tex
+		mesh.set_surface_override_material(0, sand_material)
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
@@ -63,6 +69,14 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 		if event.pressed:
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
 		else:
-			material.set_shader_parameter("draw_mask", viewport.get_texture())
-			#var tex = ImageTexture.create_from_image(viewport.get_texture().get_image()) as ImageTexture
+			var mask_img = viewport.get_texture().get_image()
+			var sand_img = sand_tex.get_image()
+			var rect = Rect2i(Vector2i.ZERO, mask_img.get_size())
+			sand_img.blend_rect_mask(sand_img, mask_img, rect, Vector2i.ZERO)
+			var blend_tex = ImageTexture.create_from_image(sand_img)
+			
+			var blend_material = StandardMaterial3D.new()
+			blend_material.albedo_texture = blend_tex
+			mesh.set_surface_override_material(0, blend_material)
+			
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
