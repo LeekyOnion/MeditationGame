@@ -89,18 +89,24 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 			var temp_img = sand_img.duplicate()
 			for y in temp_img.get_height():
 				for x in temp_img.get_width():
-					temp_img.set_pixel(x,y,Color.RED)
+					temp_img.set_pixel(x,y,Color.BLACK)
 			
 			var rect = Rect2i(Vector2i.ZERO, mask_img.get_size())
 			sand_img.blend_rect_mask(temp_img, mask_img, rect, Vector2i.ZERO)
 			var blend_tex = ImageTexture.create_from_image(sand_img)
-			
+			var mask_tex = ImageTexture.create_from_image(mask_img)
+
 			var blend_material = StandardMaterial3D.new()
 			blend_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-			blend_material.albedo_texture = blend_tex
+			blend_material.detail_enabled = true
+			blend_material.detail_blend_mode = BaseMaterial3D.BLEND_MODE_MUL
+			blend_material.albedo_texture = sand_tex
+			blend_material.detail_albedo = sand_tex
+			blend_material.detail_mask = mask_tex
 			mesh.set_surface_override_material(0, blend_material)
 			
 			sand_img = blend_tex.get_image()
+			sand_tex = blend_material.albedo_texture
 			
 			# When you need to clear once:
 			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
