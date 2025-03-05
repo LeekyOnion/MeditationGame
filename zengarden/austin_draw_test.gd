@@ -21,7 +21,7 @@ func _ready() -> void:
 			draw_material = StandardMaterial3D.new()
 			mesh.set_surface_override_material(0, draw_material)
 		draw_material.albedo_texture = viewport.get_texture()'''
-	
+	viewport.size = sand_tex.get_size()
 	if mesh != null and sand_tex != null:
 		var sand_material = StandardMaterial3D.new()
 		sand_material.albedo_texture = sand_tex
@@ -71,12 +71,33 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 		else:
 			var mask_img = viewport.get_texture().get_image()
 			var sand_img = sand_tex.get_image()
+			
+			#if the image is compressed, decompress it
+			if mask_img.is_compressed():mask_img.decompress()
+			if sand_img.is_compressed():sand_img.decompress()
+			
+			mask_img.convert(Image.FORMAT_RGBA8)
+			sand_img.convert(Image.FORMAT_RGBA8)
+			#resize the image to match the mask size
+			if sand_img.get_size() != mask_img.get_size():
+				sand_img.resize(mask_img.get_width(), mask_img.get_height())
+			
+			var temp_img = sand_img.duplicate()
+			for y in temp_img.get_height():
+				for x in temp_img.get_width():
+					temp_img.set_pixel(x,y,Color.RED)
+			
 			var rect = Rect2i(Vector2i.ZERO, mask_img.get_size())
-			sand_img.blend_rect_mask(sand_img, mask_img, rect, Vector2i.ZERO)
+			sand_img.blend_rect_mask(temp_img, mask_img, rect, Vector2i.ZERO)
 			var blend_tex = ImageTexture.create_from_image(sand_img)
 			
 			var blend_material = StandardMaterial3D.new()
+			blend_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			blend_material.albedo_texture = blend_tex
 			mesh.set_surface_override_material(0, blend_material)
 			
+			# When you need to clear once:
+			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
+			await get_tree().process_frame
+			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
