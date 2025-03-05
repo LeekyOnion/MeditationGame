@@ -7,6 +7,8 @@ const RAY_LENGTH := 1000
 @export var mesh : MeshInstance3D
 
 @onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
+@onready var mask_img
+@onready var sand_img
 #var material : ShaderMaterial
 
 func _ready() -> void:
@@ -21,11 +23,13 @@ func _ready() -> void:
 			draw_material = StandardMaterial3D.new()
 			mesh.set_surface_override_material(0, draw_material)
 		draw_material.albedo_texture = viewport.get_texture()'''
-	viewport.size = sand_tex.get_size()
+	
 	if mesh != null and sand_tex != null:
 		var sand_material = StandardMaterial3D.new()
 		sand_material.albedo_texture = sand_tex
 		mesh.set_surface_override_material(0, sand_material)
+		mask_img = viewport.get_texture().get_image()
+		sand_img = sand_tex.get_image()
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
@@ -68,10 +72,10 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
+			viewport.render_target_update_mode= SubViewport.UPDATE_ALWAYS
 		else:
-			var mask_img = viewport.get_texture().get_image()
-			var sand_img = sand_tex.get_image()
-			
+			mask_img = viewport.get_texture().get_image()
+
 			#if the image is compressed, decompress it
 			if mask_img.is_compressed():mask_img.decompress()
 			if sand_img.is_compressed():sand_img.decompress()
@@ -96,8 +100,10 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 			blend_material.albedo_texture = blend_tex
 			mesh.set_surface_override_material(0, blend_material)
 			
+			sand_img = blend_tex.get_image()
+			
 			# When you need to clear once:
-			viewport.render_target_update_mode = SubViewport.UPDATE_ONCE
+			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
-			await get_tree().process_frame
-			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
+			#await get_tree().process_frame
+			#viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER

@@ -23,7 +23,7 @@ mesh = SubResource("PlaneMesh_26sj0")
 shape = SubResource("BoxShape3D_5vh25")
 
 [node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 51.9507, 98.1102)
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 28.7397, 40.1397)
 current = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
