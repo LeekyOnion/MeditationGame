@@ -1,21 +1,16 @@
 extends Node3D
 
 const RAY_LENGTH := 1000
-@onready var shader = load("res://ArtAssets/Shaders/Sand.gdshader") as Shader
-@onready var viewport := $SubViewportContainer/SubViewport as SubViewport
-@onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @export var mesh : MeshInstance3D
 
+@onready var viewport := $SubViewportContainer/SubViewport as SubViewport
+@onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
+@onready var black_tex = load("uid://dmaaawm8mk1op") as Texture2D
 @onready var mask_img
 @onready var sand_img
-#var material : ShaderMaterial
 
 func _ready() -> void:
-	'''material = mesh.get_active_material(0) as ShaderMaterial
-	if material:
-		material.set_shader_parameter("draw_mask", viewport.get_texture())'''
-	
 	'''if viewport != null:
 		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		var draw_material = mesh.get_surface_override_material(0)
@@ -24,12 +19,14 @@ func _ready() -> void:
 			mesh.set_surface_override_material(0, draw_material)
 		draw_material.albedo_texture = viewport.get_texture()'''
 	
-	if mesh != null and sand_tex != null:
+	if mesh != null and sand_tex != null and viewport != null:
+		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 		var sand_material = StandardMaterial3D.new()
+		sand_material.detail_enabled = true
 		sand_material.albedo_texture = sand_tex
+		sand_material.detail_albedo = viewport.get_texture()
+		sand_material.detail_mask = viewport.get_texture()
 		mesh.set_surface_override_material(0, sand_material)
-		mask_img = viewport.get_texture().get_image()
-		sand_img = sand_tex.get_image()
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
@@ -77,7 +74,7 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 			mask_img = viewport.get_texture().get_image()
 
 			#if the image is compressed, decompress it
-			if mask_img.is_compressed():mask_img.decompress()
+			'''if mask_img.is_compressed():mask_img.decompress()
 			if sand_img.is_compressed():sand_img.decompress()
 			
 			mask_img.convert(Image.FORMAT_RGBA8)
@@ -93,23 +90,19 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 			
 			var rect = Rect2i(Vector2i.ZERO, mask_img.get_size())
 			sand_img.blend_rect_mask(temp_img, mask_img, rect, Vector2i.ZERO)
-			var blend_tex = ImageTexture.create_from_image(sand_img)
+			var blend_tex = ImageTexture.create_from_image(sand_img)'''
 			var mask_tex = ImageTexture.create_from_image(mask_img)
 
 			var blend_material = StandardMaterial3D.new()
-			blend_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 			blend_material.detail_enabled = true
 			blend_material.detail_blend_mode = BaseMaterial3D.BLEND_MODE_MUL
 			blend_material.albedo_texture = sand_tex
-			blend_material.detail_albedo = sand_tex
+			blend_material.detail_albedo = black_tex
 			blend_material.detail_mask = mask_tex
 			mesh.set_surface_override_material(0, blend_material)
 			
-			sand_img = blend_tex.get_image()
-			sand_tex = blend_material.albedo_texture
-			
 			# When you need to clear once:
-			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
+			viewport.render_target_update_mode = SubViewport.UPDATE_DISABLED
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
 			#await get_tree().process_frame
 			#viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_NEVER
