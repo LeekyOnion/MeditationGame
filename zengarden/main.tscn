@@ -1,24 +1,73 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5hdr8u7n3880"]
+[gd_scene load_steps=12 format=3 uid="uid://bsq8i3up4s1ig"]
 
 [ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://hud.tscn" id="1_ck0h1"]
-[ext_resource type="Script" path="res://character_body_2d.gd" id="1_i1gqj"]
-[ext_resource type="Script" path="res://main.gd" id="1_mkidq"]
 [ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="1_t76gv"]
 [ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="2_owkh3"]
 [ext_resource type="Texture2D" uid="uid://m828uux4ahtx" path="res://ArtAssets/snake-plant-house-plant-PL112722.425.jpg" id="3_4af4b"]
-[ext_resource type="PackedScene" uid="uid://cd6ccld67lmgj" path="res://sprite.tscn" id="5_fo4fq"]
+[ext_resource type="PackedScene" uid="uid://bxgxt5hh1agcf" path="res://sprite.tscn" id="5_fo4fq"]
 [ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="6_rcyg0"]
-[ext_resource type="Script" path="res://label_2.gd" id="9_aqdi6"]
+
+[sub_resource type="GDScript" id="GDScript_4b8l3"]
+script/source = "extends Node2D
+class_name Main
+
+@onready var hud = $HUD
+@onready var journal_hud = $JournalHUD
+
+
+
+func _ready() -> void:
+	hud.main = self
+	journal_hud.main = self
+
+func _process(delta: float) -> void:
+		#system time
+	print(Global.month_year)
+	$Label.text = Global.month_year
+	pass
+"
 
 [sub_resource type="TileSet" id="TileSet_letmj"]
 tile_size = Vector2i(128, 128)
 
+[sub_resource type="GDScript" id="GDScript_4oqer"]
+script/source = "extends CharacterBody2D
+
+func _physics_process(delta):
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
+	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
+	
+	input_vector = input_vector.normalized()
+	#print(input_vector)
+	
+	if input_vector:
+		velocity = input_vector * 300
+	else:
+		velocity = input_vector
+	move_and_slide()
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xg5l0"]
 size = Vector2(68, 69)
 
+[sub_resource type="GDScript" id="GDScript_8sgkj"]
+script/source = "extends Label
+
+func _process(delta):
+	if Global.sys_month == \"12\" or \"01\" or \"02\":
+		self.text = \"Winter\"
+	elif Global.sys_month == \"03\" or \"04\" or \"05\":
+		self.text = \"Spring\"
+	elif Global.sys_month == \"06\" or \"07\" or \"08\":
+		self.text = \"Summer\"
+	elif Global.sys_month == \"09\" or \"10\" or \"11\":
+		self.text = \"Fall\"
+"
+
 [node name="Main" type="Node2D"]
 position = Vector2(429, 212)
-script = ExtResource("1_mkidq")
+script = SubResource("GDScript_4b8l3")
 
 [node name="HUD" parent="." instance=ExtResource("1_ck0h1")]
 
@@ -31,7 +80,7 @@ tile_set = SubResource("TileSet_letmj")
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 scale = Vector2(0.05, 0.05)
 disable_mode = 2
-script = ExtResource("1_i1gqj")
+script = SubResource("GDScript_4oqer")
 
 [node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(1.235, 1)
@@ -62,4 +111,4 @@ offset_left = 618.0
 offset_top = 6.0
 offset_right = 658.0
 offset_bottom = 29.0
-script = ExtResource("9_aqdi6")
+script = SubResource("GDScript_8sgkj")
