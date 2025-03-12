@@ -16,7 +16,7 @@ var journal_entries: Array = []
 func _ready():
 	# Connect the button's pressed signal to a function
 #	save_button.connect(\"pressed\", Callable(self, \"_on_save_button_pressed\"))
-	pass
+	continue
 
 func _on_save_button_pressed():
 	# Get the text from the TextEdit
