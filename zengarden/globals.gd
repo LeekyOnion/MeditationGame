@@ -22,14 +22,15 @@ func _ready() -> void:
 	print("User data directory: ", OS.get_user_data_dir())
 
 	# Get the current time
-	current_time = Time.get_unix_time_from_system()
+	var current_time = Time.get_unix_time_from_system()
 
 	# Calculate the time difference
 	var time_passed: int = current_time - last_time_opened
-	print("Time passed since last open: ", time_passed, " seconds")
+	print("Time passed since last open: ", format_time_difference(time_passed))
 
 	# Save the current time as the new "last opened" time
-	save_last_time_opened()
+	save_last_time_opened(current_time)
+
 
 func load_last_time_opened() -> void:
 	var config = ConfigFile.new()
@@ -38,13 +39,26 @@ func load_last_time_opened() -> void:
 	else:
 		print("No saved timestamp found. Using default value (0).")
 
-func save_last_time_opened() -> void:
+
+func save_last_time_opened(current_time: int) -> void:
 	var config = ConfigFile.new()
 	config.set_value("timestamps", "last_time_opened", current_time)
 	config.save(SAVE_PATH)
 
+
+func format_time_difference(seconds: int) -> String:
+	var days: int = seconds / (24 * 60 * 60)
+	seconds %= 24 * 60 * 60
+	var hours: int = seconds / (60 * 60)
+	seconds %= 60 * 60
+	var minutes: int = seconds / 60
+	seconds %= 60
+
+	return "%d days, %d hours, %d minutes, %d seconds" % [days, hours, minutes, seconds]
+
+
 func _notification(what: int) -> void:
 	# Detect when the game is about to close
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
-		save_last_time_opened()
+		save_last_time_opened(Time.get_unix_time_from_system())
 		get_tree().quit()

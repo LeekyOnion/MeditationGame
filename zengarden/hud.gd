@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name HUD
 
-var main = load("res://levels/Main.tscn")
+var main = Main
 
 func _open_journal() -> void:
 	main.journal_hud.visible = true

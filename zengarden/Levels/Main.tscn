@@ -1,12 +1,30 @@
-[gd_scene load_steps=4 format=3 uid="uid://bndq3ulw762aq"]
+[gd_scene load_steps=8 format=3 uid="uid://bndq3ulw762aq"]
 
+[ext_resource type="Script" path="res://Levels/main.gd" id="1_1gteu"]
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/player_Controller.gd" id="1_x3l6b"]
 [ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="1_yliqg"]
+[ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="3_1fack"]
+[ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://hud.tscn" id="4_7ghdo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ruu"]
 size = Vector2(64, 57)
 
+[sub_resource type="GDScript" id="GDScript_t3742"]
+script/source = "extends Label
+
+func _process(delta):
+	if Global.sys_month == \"12\" or \"01\" or \"02\":
+		self.text = \"Winter\"
+	elif Global.sys_month == \"03\" or \"04\" or \"05\":
+		self.text = \"Spring\"
+	elif Global.sys_month == \"06\" or \"07\" or \"08\":
+		self.text = \"Summer\"
+	elif Global.sys_month == \"09\" or \"10\" or \"11\":
+		self.text = \"Fall\"
+"
+
 [node name="Main" type="Node2D"]
+script = ExtResource("1_1gteu")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 script = ExtResource("1_x3l6b")
@@ -19,3 +37,21 @@ shape = SubResource("RectangleShape2D_c5ruu")
 position = Vector2(146, 77.5)
 scale = Vector2(0.0869566, 0.0726601)
 texture = ExtResource("1_yliqg")
+
+[node name="JournalHUD" parent="." instance=ExtResource("3_1fack")]
+visible = false
+
+[node name="HUD" parent="." instance=ExtResource("4_7ghdo")]
+
+[node name="Label" type="Label" parent="."]
+offset_left = 939.0
+offset_top = 4.0
+offset_right = 1074.0
+offset_bottom = 48.0
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 1093.0
+offset_top = 115.0
+offset_right = 1133.0
+offset_bottom = 138.0
+script = SubResource("GDScript_t3742")
