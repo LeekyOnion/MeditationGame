@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://bvgqya10gl5hp"]
+
+[ext_resource type="Script" path="res://Scripts/JournalScripts/JournalManager.gd" id="1_kg1va"]
+
+[node name="BenJournalScene" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_kg1va")
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 184.0
+
+[node name="GradientTexture" type="TextureRect" parent="Control/Background"]
+layout_mode = 0
+offset_right = 383.0
+offset_bottom = 183.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 384.0
+offset_bottom = 182.0
+
+[node name="TextEdit" type="TextEdit" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+
+[connection signal="text_changed" from="Control/VBoxContainer/TextEdit" to="Control" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="Control/VBoxContainer/SaveButton" to="Control" method="_on_save_button_pressed"]

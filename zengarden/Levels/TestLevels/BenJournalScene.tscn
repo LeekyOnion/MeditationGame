@@ -1,0 +1,46 @@
+[gd_scene load_steps=4 format=3 uid="uid://bvgqya10gl5hp"]
+
+[ext_resource type="Script" path="res://Scripts/JournalScripts/JournalManager.gd" id="1_kg1va"]
+
+[sub_resource type="Gradient" id="Gradient_yke1k"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_segvk"]
+gradient = SubResource("Gradient_yke1k")
+
+[node name="BenJournalScene" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 384.0
+offset_bottom = 183.0
+script = ExtResource("1_kg1va")
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 1153.0
+offset_bottom = 646.0
+
+[node name="GradientTexture" type="TextureRect" parent="Control/Background"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 647.0
+texture = SubResource("GradientTexture2D_segvk")
+
+[node name="TextEdit" type="TextEdit" parent="Control"]
+layout_mode = 2
+offset_left = -3.0
+offset_top = 5.0
+offset_right = 1149.0
+offset_bottom = 584.0
+
+[node name="SaveButton" type="Button" parent="Control"]
+layout_mode = 2
+offset_left = 553.0
+offset_top = 595.0
+offset_right = 641.0
+offset_bottom = 616.0
+text = "Save Entry"
+
+[connection signal="text_changed" from="Control/TextEdit" to="Control" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="Control/SaveButton" to="Control" method="_on_save_button_pressed"]
