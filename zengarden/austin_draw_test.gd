@@ -10,6 +10,9 @@ const RAY_LENGTH := 1000
 @onready var mask_img
 @onready var sand_img
 
+var mouse_pos
+var prev_mouse_pos = Vector3(0, 0, 0)
+
 func _ready() -> void:
 	'''if viewport != null:
 		viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
@@ -30,9 +33,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if get_mouse_world_position() != null:
-		var mouse_pos = get_mouse_world_position()
+		mouse_pos = get_mouse_world_position()
 		#print(mouse_pos)
 		sprite.global_position = Vector2(mouse_pos.x * 8, mouse_pos.z * 8)
+		sprite.look_at(Vector2(prev_mouse_pos.x * 8, prev_mouse_pos.z * 8))
+		prev_mouse_pos = mouse_pos
 
 func _do_raycast_on_mouse_position(collision_mask: int = 0b00000000_00000000_00000000_00000001):
 	# Raycast related code

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://fts5457vhobt"]
 
 [ext_resource type="Script" path="res://austin_draw_test.gd" id="1_l8xga"]
-[ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_nmte4"]
+[ext_resource type="Texture2D" uid="uid://bxtu26o68k0y2" path="res://ArtAssets/Textures/Rake-Sprite_1.png" id="2_lyg0b"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
 size = Vector2(128, 128)
@@ -32,14 +32,13 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
-transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1024, 1024)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(32, 32)
-texture = ExtResource("2_nmte4")
+texture = ExtResource("2_lyg0b")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.673825, 0.738891, 0, -0.738891, 0.673825, 61.8754, 39.1331, 56.5474)
