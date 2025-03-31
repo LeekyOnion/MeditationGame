@@ -29,10 +29,10 @@ texture = SubResource("GradientTexture2D_segvk")
 
 [node name="TextEdit" type="TextEdit" parent="Control"]
 layout_mode = 2
-offset_left = -3.0
-offset_top = 5.0
-offset_right = 1149.0
-offset_bottom = 584.0
+offset_left = 308.0
+offset_top = 55.0
+offset_right = 889.0
+offset_bottom = 553.0
 
 [node name="SaveButton" type="Button" parent="Control"]
 layout_mode = 2
