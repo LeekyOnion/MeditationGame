@@ -1,8 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxgxt5hh1agcf"]
-
-[sub_resource type="GDScript" id="GDScript_2bkes"]
-script/source = "extends Node2D
-class_name Sprite
+extends Node2D
+class_name DraggableSprite
 
 @onready var sprite = $Visual
 @onready var collision = $Visual/Area2D/CollisionShape2D
@@ -35,18 +32,3 @@ func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) 
 			selected = true
 		else:
 			selected = false
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_037ff"]
-
-[node name="Sprite" type="Node2D"]
-script = SubResource("GDScript_2bkes")
-
-[node name="Visual" type="Sprite2D" parent="."]
-
-[node name="Area2D" type="Area2D" parent="Visual"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visual/Area2D"]
-shape = SubResource("RectangleShape2D_037ff")
-
-[connection signal="input_event" from="Visual/Area2D" to="." method="_on_area_2d_input_event"]

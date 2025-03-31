@@ -6,7 +6,7 @@ const RAY_LENGTH := 1000
 @onready var viewport := $SubViewportContainer/SubViewport as SubViewport
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
-@onready var black_tex = load("uid://dmaaawm8mk1op") as Texture2D
+@onready var black_tex = load("uid://jx07kg3xq5gb") as Texture2D
 @onready var mask_img
 @onready var sand_img
 

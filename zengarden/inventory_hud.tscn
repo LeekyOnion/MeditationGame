@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj14g5ed4a6om"]
+
+[ext_resource type="Script" path="res://Scripts/Inventory/inventory_hud.gd" id="1_mrkk7"]
+[ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_crs4l"]
+[ext_resource type="PackedScene" uid="uid://bxgxt5hh1agcf" path="res://draggable_sprite.tscn" id="2_dinff"]
+
+[node name="InventoryHUD" type="CanvasLayer"]
+script = ExtResource("1_mrkk7")
+draggable_sprite_scene = ExtResource("2_dinff")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 400.0
+offset_bottom = 650.0
+
+[node name="SpriteButton" type="Button" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -68.0
+offset_right = 68.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+icon = ExtResource("2_crs4l")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 1
+offset_right = 50.0
+offset_bottom = 40.0
+text = "Close"
+
+[connection signal="pressed" from="Panel/SpriteButton" to="." method="_select_item"]
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_close_inventory"]

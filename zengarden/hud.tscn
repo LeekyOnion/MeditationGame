@@ -17,4 +17,10 @@ grow_horizontal = 0
 layout_mode = 2
 text = "Journal"
 
+[node name="InventoryButton" type="Button" parent="."]
+offset_right = 83.0
+offset_bottom = 40.0
+text = "Inventory"
+
 [connection signal="pressed" from="MarginContainer/JournalButton" to="." method="_open_journal"]
+[connection signal="pressed" from="InventoryButton" to="." method="_open_inventory"]
