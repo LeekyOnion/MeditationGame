@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="WordDatabase" load_steps=2 format=3 uid="uid://b8elfaa1wsybe"]
+
+[ext_resource type="Script" path="res://Scripts/Resources/wordImageBank.gd" id="1_ud8jq"]
+
+[resource]
+script = ExtResource("1_ud8jq")
+word_images = {}

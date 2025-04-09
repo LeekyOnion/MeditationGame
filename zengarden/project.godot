@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://globals.gd"
+Global="*res://Scripts/globals.gd"
 VertexPositionMapper="*res://Scripts/vertex_position_mapper.gd"
 
 [display]

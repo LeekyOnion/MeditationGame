@@ -14,6 +14,7 @@ const SAVE_PATH: String = "user://last_time_opened.cfg"
 # Variables to store the last and current timestamps
 var last_time_opened: int = 0
 
+var word_bank = ["Tree", "bubbble", "Leaf"]
 
 func _ready() -> void:
 	# Load the last saved timestamp
