@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxgxt5hh1agcf"]
 
-[ext_resource type="Script" path="res://Scripts/draggable_sprite.gd" id="1_ekoj6"]
+[ext_resource type="Script" path="res://Scripts/draggable_sprite.gd" id="1_cnwdo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_037ff"]
 
 [node name="Sprite" type="Node2D"]
-script = ExtResource("1_ekoj6")
+script = ExtResource("1_cnwdo")
 
 [node name="Visual" type="Sprite2D" parent="."]
 

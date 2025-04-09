@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://Scripts/PlayerScripts/player_Controller.gd" id="1_x3l6b"]
 [ext_resource type="Texture2D" uid="uid://0bw025hktssp" path="res://ArtAssets/e28a8b8a015c11d54a3f5663e7e4068b.jpg" id="1_yliqg"]
 [ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="3_1fack"]
-[ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://hud.tscn" id="4_7ghdo"]
+[ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://Scenes/hud.tscn" id="4_7ghdo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5ruu"]
 size = Vector2(64, 57)

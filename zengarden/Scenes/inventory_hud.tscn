@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/Inventory/inventory_hud.gd" id="1_mrkk7"]
 [ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_crs4l"]
-[ext_resource type="PackedScene" uid="uid://bxgxt5hh1agcf" path="res://draggable_sprite.tscn" id="2_dinff"]
+[ext_resource type="PackedScene" uid="uid://bxgxt5hh1agcf" path="res://Scenes/draggable_sprite.tscn" id="2_dinff"]
 
 [node name="InventoryHUD" type="CanvasLayer"]
 script = ExtResource("1_mrkk7")
