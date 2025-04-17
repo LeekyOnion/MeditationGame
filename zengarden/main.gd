@@ -16,6 +16,3 @@ func _process(delta: float) -> void:
 	print(Global.month_year)
 	$Label.text = Global.month_year
 	pass
-
-func spawn_draggable_sprite() -> void:
-	pass

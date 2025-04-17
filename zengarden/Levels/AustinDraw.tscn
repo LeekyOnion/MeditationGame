@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=3 uid="uid://mkat4lptsce"]
+
+[ext_resource type="Script" path="res://austin_draw_test.gd" id="1_l8xga"]
+[ext_resource type="Texture2D" uid="uid://bc34c1q01abmc" path="res://ArtAssets/Textures/Rake-Sprite_1_W.png" id="2_fld2l"]
+[ext_resource type="Shader" path="res://GroundDraw.gdshader" id="2_twtji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xt86i"]
+render_priority = 1
+shader = ExtResource("2_twtji")
+shader_parameter/amount_changes = null
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_26sj0"]
+material = SubResource("ShaderMaterial_xt86i")
+size = Vector2(128, 128)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5vh25"]
+size = Vector3(128, 0.1, 128)
+
+[node name="AustinDraw" type="Node3D" node_paths=PackedStringArray("mesh")]
+script = ExtResource("1_l8xga")
+mesh = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
+mesh = SubResource("PlaneMesh_26sj0")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_5vh25")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 42.8261, 88.5457)
+current = true
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+render_target_update_mode = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(32, 32)
+texture = ExtResource("2_fld2l")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.673825, 0.738891, 0, -0.738891, 0.673825, 61.8754, 39.1331, 56.5474)
+
+[connection signal="input_event" from="MeshInstance3D/StaticBody3D" to="." method="_on_mouse_clicked"]
