@@ -1,7 +1,7 @@
 extends CanvasLayer
 class_name HUD
 
-var main = Main
+var main = MainGarden
 
 func _open_journal() -> void:
 	main.journal_hud.visible = true

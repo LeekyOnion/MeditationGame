@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://hp3p8rkykfpw"]
+
+[ext_resource type="Script" path="res://Scripts/main_garden.gd" id="1_2w40t"]
+[ext_resource type="PackedScene" uid="uid://mkat4lptsce" path="res://Levels/AustinDraw.tscn" id="1_ym5i4"]
+[ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://hud.tscn" id="2_d3flh"]
+[ext_resource type="PackedScene" uid="uid://dj14g5ed4a6om" path="res://inventory_hud.tscn" id="4_do3xs"]
+[ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="5_aqloa"]
+[ext_resource type="PackedScene" uid="uid://cgff50s8exjob" path="res://billboard_sprite.tscn" id="6_7n5tt"]
+[ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="7_vd8yg"]
+
+[node name="MainGarden" type="Node3D"]
+script = ExtResource("1_2w40t")
+
+[node name="AustinDraw" parent="." instance=ExtResource("1_ym5i4")]
+
+[node name="HUD" parent="." instance=ExtResource("2_d3flh")]
+
+[node name="InventoryHUD" parent="." instance=ExtResource("4_do3xs")]
+visible = false
+
+[node name="JournalHUD" parent="." instance=ExtResource("5_aqloa")]
+visible = false
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(16, 16, 16)
+
+[node name="BillboardSprite" parent="." node_paths=PackedStringArray("grid_map") instance=ExtResource("6_7n5tt")]
+transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 64, 0, 64)
+_texture = ExtResource("7_vd8yg")
+grid_map = NodePath("../GridMap")

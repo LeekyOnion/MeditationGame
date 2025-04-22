@@ -5,7 +5,7 @@ class_name InventoryHUD
 
 @onready var sprite_button = %SpriteButton
 
-var main : Main
+var main : MainGarden
 
 func _select_item() -> void:
 	var draggable_sprite = draggable_sprite_scene.instantiate()
