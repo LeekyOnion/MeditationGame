@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/Inventory/inventory_hud.gd" id="1_mrkk7"]
 [ext_resource type="Texture2D" uid="uid://df2qm3m3ceemk" path="res://icon.svg" id="2_crs4l"]
-[ext_resource type="PackedScene" uid="uid://bxgxt5hh1agcf" path="res://draggable_sprite.tscn" id="2_dinff"]
+[ext_resource type="PackedScene" uid="uid://cgff50s8exjob" path="res://billboard_sprite.tscn" id="2_cuw4c"]
 
 [node name="InventoryHUD" type="CanvasLayer"]
 script = ExtResource("1_mrkk7")
-draggable_sprite_scene = ExtResource("2_dinff")
+billboard_sprite_scene = ExtResource("2_cuw4c")
 
 [node name="Panel" type="Panel" parent="."]
 offset_right = 400.0

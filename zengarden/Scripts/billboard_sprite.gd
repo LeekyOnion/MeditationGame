@@ -10,6 +10,7 @@ class_name BillboardSprite
 var selected = false
 var mouse_offset = Vector3(0, 0, 0)
 var tile_size = Vector3(0, 0, 0)
+var input_event : InputEventMouseButton
 
 const RAY_LENGTH := 1000
 
@@ -18,10 +19,13 @@ func _ready() -> void:
 	if _texture != null and grid_map != null:
 		sprite.texture = _texture
 		tile_size = grid_map.cell_size
-	#collision.shape.size = Vector3(sprite.texture.get_size().x, sprite.texture.get_size().y, 0)
+	scale = Vector3(8, 8, 8)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if input_event != null and Input.is_action_just_released("right_click"):
+		selected = false
+		input_event = null
 	if selected:
 		followMouse()
 
@@ -58,13 +62,12 @@ func get_raycast_hit_object(collision_mask: int = 0b00000000_00000000_00000000_0
 
 func followMouse():
 	if get_mouse_world_position() != null:
-		var pos = get_mouse_world_position() + mouse_offset
+		var pos = get_mouse_world_position()
 		position = pos.snapped(Vector3(tile_size.x, 0, tile_size.z))
+		position.y = 4
 
 func _on_area_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
+		input_event = event
 		if event.pressed:
-			mouse_offset = position - get_mouse_world_position()
 			selected = true
-		else:
-			selected = false
