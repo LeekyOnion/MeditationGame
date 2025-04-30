@@ -8,6 +8,7 @@ func _physics_process(delta: float) -> void:
 	# Get input for movement
 	var direction: Vector2 = Vector2.ZERO
 
+#redundant 2d controls
 	if Input.is_action_pressed("ui_up"):
 		direction.y -= 1
 	if Input.is_action_pressed("ui_down"):

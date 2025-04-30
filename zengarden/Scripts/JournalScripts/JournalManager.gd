@@ -1,3 +1,7 @@
+#this script is the journal, the journal is meant to be a mechanic in which you type out some things going on, and there would be visual feedback to 
+#what you are going to type. This prototype uses color gradients for every space in between a collection of character(s)
+# and also pops bubbles onto the screen. Ideally, you want assets to make a complete image with some trigger words that will trigger specific feedback. 
+
 #extends Control
 #
 #@onready var text_edit = $TextEdit

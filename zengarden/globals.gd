@@ -1,6 +1,6 @@
 extends Node
 
-
+#variables related to keeping track of the time in the real world to be used in the game
 static var current_time = String(Time.get_datetime_string_from_system(false, true))
 static var date_partition = current_time.split("T")[0]
 static var sys_year = date_partition.split("-")[0]
@@ -14,6 +14,7 @@ const SAVE_PATH: String = "user://last_time_opened.cfg"
 # Variables to store the last and current timestamps
 var last_time_opened: int = 0
 
+# word bank to be used when triggerin certain events in the journal
 var word_bank = ["Tree", "bubbble", "Leaf"]
 
 func _ready() -> void:
@@ -33,6 +34,7 @@ func _ready() -> void:
 	save_last_time_opened(current_time)
 
 
+#function to loat the time that the game was opened last
 func load_last_time_opened() -> void:
 	var config = ConfigFile.new()
 	if config.load(SAVE_PATH) == OK:
@@ -41,12 +43,14 @@ func load_last_time_opened() -> void:
 		print("No saved timestamp found. Using default value (0).")
 
 
+#Save the last timethe game was opened to a file
 func save_last_time_opened(current_time: int) -> void:
 	var config = ConfigFile.new()
 	config.set_value("timestamps", "last_time_opened", current_time)
 	config.save(SAVE_PATH)
 
 
+#function to format the time difference from last open to current open - this should be used to calculate whether certain things should happen to plants
 func format_time_difference(seconds: int) -> String:
 	var days: int = seconds / (24 * 60 * 60)
 	seconds %= 24 * 60 * 60

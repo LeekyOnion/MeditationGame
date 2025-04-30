@@ -1,3 +1,5 @@
+#this script is an early prototype for a grid style placement system 
+
 extends Node2D
 class_name DraggableSprite
 
