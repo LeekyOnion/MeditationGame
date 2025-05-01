@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://mkat4lptsce" path="res://Levels/AustinDraw.tscn" id="1_ym5i4"]
 [ext_resource type="PackedScene" uid="uid://cjndkfg7b5nx4" path="res://hud.tscn" id="2_d3flh"]
 [ext_resource type="PackedScene" uid="uid://dj14g5ed4a6om" path="res://inventory_hud.tscn" id="4_do3xs"]
-[ext_resource type="PackedScene" uid="uid://bkggtoaqt8akd" path="res://journal_hud.tscn" id="5_aqloa"]
+[ext_resource type="PackedScene" uid="uid://bvgqya10gl5hp" path="res://Levels/TestLevels/BenJournalScene.tscn" id="6_yk58j"]
 
 [node name="MainGarden" type="Node3D"]
 script = ExtResource("1_2w40t")
@@ -16,7 +16,7 @@ script = ExtResource("1_2w40t")
 [node name="InventoryHUD" parent="." instance=ExtResource("4_do3xs")]
 visible = false
 
-[node name="JournalHUD" parent="." instance=ExtResource("5_aqloa")]
+[node name="BenJournalScene" parent="." instance=ExtResource("6_yk58j")]
 visible = false
 
 [node name="GridMap" type="GridMap" parent="."]

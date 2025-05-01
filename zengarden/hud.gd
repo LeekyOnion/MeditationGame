@@ -1,10 +1,11 @@
+#Manages the visibility of different HUD elements in the MainGarden scene.
 extends CanvasLayer
 class_name HUD
 
 var main = MainGarden
 
 func _open_journal() -> void:
-	main.journal_hud.visible = true
+	main.journal.visible = true
 	main.hud.visible = false
 
 func _open_inventory() -> void:

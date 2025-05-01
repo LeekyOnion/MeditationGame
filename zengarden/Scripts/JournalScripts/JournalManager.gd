@@ -78,6 +78,7 @@ extends Control
 @onready var background = $Background  # Should be a ColorRect/Control node
 @onready var gradient_rect = $Background/GradientTexture
 
+var main = MainGarden
 
 var current_gradient: Gradient
 var word_count: int = 0
@@ -187,3 +188,7 @@ func _on_text_edit_text_changed() -> void:
 	_on_text_text_changed()
 	pass # Replace with function body.
 # Rest of your existing button handlers...
+
+func _close_journal() -> void:
+	main.hud.visible = true
+	main.journal.visible = false

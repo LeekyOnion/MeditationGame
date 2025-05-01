@@ -1,8 +1,11 @@
+#Manages the functionality for each billboard sprite spawned in as a decoration
+#from the MainGarden inventory HUD.
+#Raycast code from here and AustinDraw can probably be made into its own class,
+#as it is the same code between the two.
 extends Node3D
 class_name BillboardSprite
 
 @onready var sprite : Sprite3D = $Sprite3D
-@onready var collision : CollisionShape3D = $Visual/Area3D/CollisionShape3D
 
 @export var _texture : Texture2D
 @export var grid_map : GridMap
@@ -19,18 +22,21 @@ func _ready() -> void:
 	if _texture != null and grid_map != null:
 		sprite.texture = _texture
 		tile_size = grid_map.cell_size
-	scale = Vector3(8, 8, 8)
+	scale = Vector3(8, 8, 8) #Change when needed, just thought it was a fine size for now
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#Similar code to the raking. When holding right click on the billboard sprite,
+	#it will follow the mouse's position, snapping to the closest point on the MainGarden grid map.
 	if input_event != null and Input.is_action_just_released("right_click"):
 		selected = false
 		input_event = null
 	if selected:
 		followMouse()
 
+#collision_mask is the default bitmask in Godot to detect 3D collisions between a raycast and object
 func _do_raycast_on_mouse_position(collision_mask: int = 0b00000000_00000000_00000000_00000001):
-	# Raycast related code
+	# Raycast related code to detect any objects in the path of a raycast from the camera to the current mouse position.
 	var space_state = get_world_3d().direct_space_state
 	var cam = get_viewport().get_camera_3d()
 	var mousepos = get_viewport().get_mouse_position()
@@ -46,14 +52,16 @@ func _do_raycast_on_mouse_position(collision_mask: int = 0b00000000_00000000_000
 
 # Gets ray-cast hit position from camera to world.
 # @return Vector3 or null
+#collision_mask is the default bitmask in Godot to detect 3D collisions between a raycast and object
 func get_mouse_world_position(collision_mask: int = 0b00000000_00000000_00000000_00000001):
 	var raycast_result = _do_raycast_on_mouse_position(collision_mask)
 	if raycast_result:
 		return raycast_result.position
 	return null
 
-# Gets ray-cast hit object from camera to world.
+# Gets ray-cast hit object from camera to world. Not currently used, but here if needed in future.
 # @return Object or null
+#collision_mask is the default bitmask in Godot to detect 3D collisions between a raycast and object
 func get_raycast_hit_object(collision_mask: int = 0b00000000_00000000_00000000_00000001):
 	var raycast_result = _do_raycast_on_mouse_position(collision_mask)
 	if raycast_result:
