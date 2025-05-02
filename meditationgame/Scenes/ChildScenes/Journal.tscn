@@ -1,0 +1,42 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjs3v33r83mec"]
+
+[ext_resource type="Script" path="res://Scripts/GeneralScripts/JournalManager.gd" id="1_xhhvi"]
+
+[node name="Journal" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_xhhvi")
+
+[node name="Background" type="ColorRect" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="GradientTexture" type="TextureRect" parent="Control/Background"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextEdit" type="TextEdit" parent="Control"]
+layout_mode = 0
+offset_right = 8.0
+offset_bottom = 8.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SaveButton" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="Control/HBoxContainer"]
+layout_mode = 2
+
+[connection signal="text_changed" from="Control/TextEdit" to="Control" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="Control/HBoxContainer/SaveButton" to="Control" method="_on_save_button_pressed"]
+[connection signal="pressed" from="Control/HBoxContainer/CloseButton" to="Control" method="_close_journal"]

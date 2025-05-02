@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj7k5rms4bygv"]
+
+[ext_resource type="Script" path="res://Scripts/SceneScripts/hud.gd" id="1_6vv1g"]
+
+[node name="Hud" type="CanvasLayer"]
+script = ExtResource("1_6vv1g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Journal" type="Button" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Inventory" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
+
+[connection signal="pressed" from="MarginContainer/Journal" to="." method="_open_journal"]
+[connection signal="pressed" from="Inventory" to="." method="_open_inventory"]

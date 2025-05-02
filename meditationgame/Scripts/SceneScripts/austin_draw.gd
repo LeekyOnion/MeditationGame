@@ -12,6 +12,7 @@ const RAY_LENGTH := 1000 #How far the raycast is shot out from the camera
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
 @onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
 @onready var black_tex = load("uid://jx07kg3xq5gb") as Texture2D
+
 var mask_img : Image
 var sand_img : Image
 var black_img : Image
@@ -124,3 +125,7 @@ func _on_mouse_clicked(camera: Node, event: InputEvent, event_position: Vector3,
 			viewport.render_target_clear_mode = SubViewport.CLEAR_MODE_ALWAYS
 			viewport.render_target_update_mode = SubViewport.UPDATE_ALWAYS
 			await get_tree().process_frame
+
+
+func _on_static_body_3d_input_event(camera: Node, event: InputEvent, event_position: Vector3, normal: Vector3, shape_idx: int) -> void:
+	pass # Replace with function body.

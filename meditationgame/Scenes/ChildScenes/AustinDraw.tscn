@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://vhjn3lob5sp"]
+
+[ext_resource type="Script" path="res://Scripts/SceneScripts/austin_draw.gd" id="1_8uene"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aewyr"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fdrl"]
+
+[node name="AustinDraw" type="Node3D"]
+script = ExtResource("1_8uene")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
+mesh = SubResource("PlaneMesh_aewyr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_3fdrl")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 42, 88)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1024, 1024)
+
+[node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
+position = Vector2(32, 32)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.681998, 0.731354, 0, -0.731354, 0.681998, 61, 39, 56)
+
+[connection signal="input_event" from="MeshInstance3D/StaticBody3D" to="." method="_on_mouse_clicked"]

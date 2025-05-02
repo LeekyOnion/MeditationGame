@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmyixwun1utuy"]
+
+[ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_s5jug"]
+
+[node name="MainGarden" type="Node3D"]
+script = ExtResource("1_s5jug")
