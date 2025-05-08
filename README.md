@@ -3,6 +3,8 @@ The repository for the game project (currently titled meditation game) being mad
 
 Providing an escape for students and whomever needs it. A retreat into a simple, quaint little farmhouse to tend to your garden, and write about your feelings.
 
+NOTICE -> USE THE MEDITATION GAME FOLDER -> ZEN GARDEN IS DEPRACATED
+
 # A Notice of Privacy
 Given the nature of sharing private information we are committed to the protection of your save files and game instances from data collection of any kind from the development team, UW-Stout, or whomever may manage this game in the future.
 
