@@ -4,9 +4,9 @@ class_name MainGarden
 
 
 #References to different hud elements / screens and the grid map that decorations are placed on.
-@onready var hud = $HUD
-@onready var journal = $BenJournalScene
-@onready var journal_hud = $BenJournalScene/Control
+@onready var hud = $Hud
+@onready var journal = $Journal
+@onready var journal_hud = $Journal/Control
 @onready var inventory_hud = $InventoryHUD
 @onready var tile = $GridMap
 

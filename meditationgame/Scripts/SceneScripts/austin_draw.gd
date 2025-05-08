@@ -10,8 +10,8 @@ const RAY_LENGTH := 1000 #How far the raycast is shot out from the camera
 #References to the textures and nodes required to make the raking functional.
 @onready var viewport := $SubViewportContainer/SubViewport as SubViewport
 @onready var sprite := $SubViewportContainer/SubViewport/Sprite2D as Sprite2D
-@onready var sand_tex = load("uid://dpni7xv27k32k") as Texture2D
-@onready var black_tex = load("uid://jx07kg3xq5gb") as Texture2D
+@onready var sand_tex = load("uid://lmrhn5yvdkaj") as Texture2D
+@onready var dark_sand_tex = load("uid://bc3lhpc3e1mr8") as Texture2D
 
 var mask_img : Image
 var sand_img : Image
@@ -37,7 +37,7 @@ func _ready() -> void:
 		blend_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 		blend_material.blend_mode = BaseMaterial3D.BLEND_MODE_MIX
 		blend_material.detail_enabled = true
-		blend_material.detail_albedo = black_tex
+		blend_material.detail_albedo = dark_sand_tex
 		blend_material.albedo_texture = viewport.get_texture()
 		mesh.material_overlay = blend_material
 

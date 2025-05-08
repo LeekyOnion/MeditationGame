@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_new_game_button_pressed():
 	# Load the game scene and switch to it
-	var game_scene = load("res://Levels/MainGarden.tscn")  # Replace with your game scene path
+	var game_scene = load("res://Scenes/MainGarden.tscn")  # Replace with your game scene path
 	get_tree().change_scene_to_packed(game_scene)
 
 func _on_quit_button_pressed():

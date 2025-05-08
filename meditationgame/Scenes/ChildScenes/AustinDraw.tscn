@@ -1,13 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://vhjn3lob5sp"]
+[gd_scene load_steps=7 format=3 uid="uid://vhjn3lob5sp"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/austin_draw.gd" id="1_8uene"]
+[ext_resource type="Shader" path="res://Shaders/GroundDraw.gdshader" id="2_0jks3"]
+[ext_resource type="Texture2D" uid="uid://odbkwht4ya0g" path="res://ArtAssets/Rake-Sprite_1_W.png" id="3_0how4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mjfb1"]
+render_priority = 0
+shader = ExtResource("2_0jks3")
+shader_parameter/amount_changes = null
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_aewyr"]
+material = SubResource("ShaderMaterial_mjfb1")
+size = Vector2(128, 128)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_3fdrl"]
+size = Vector3(128, 0.1, 128)
 
-[node name="AustinDraw" type="Node3D"]
+[node name="AustinDraw" type="Node3D" node_paths=PackedStringArray("mesh")]
 script = ExtResource("1_8uene")
+mesh = NodePath("MeshInstance3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 64, 0, 64)
@@ -22,6 +33,7 @@ shape = SubResource("BoxShape3D_3fdrl")
 transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 42, 88)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 
@@ -29,9 +41,11 @@ offset_bottom = 40.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1024, 1024)
+render_target_update_mode = 0
 
 [node name="Sprite2D" type="Sprite2D" parent="SubViewportContainer/SubViewport"]
 position = Vector2(32, 32)
+texture = ExtResource("3_0how4")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.681998, 0.731354, 0, -0.731354, 0.681998, 61, 39, 56)

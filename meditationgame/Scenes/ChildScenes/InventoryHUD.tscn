@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://sr4mkvaatyl2"]
+
+[ext_resource type="Script" path="res://Scripts/SceneScripts/inventory_hud.gd" id="1_qg440"]
+[ext_resource type="PackedScene" uid="uid://cdenj6yid5yw" path="res://Scenes/ChildScenes/BillboardSprite.tscn" id="2_iqn5b"]
+[ext_resource type="Texture2D" uid="uid://nmvax4h8e8bf" path="res://icon.svg" id="2_kpsb5"]
+
+[node name="InventoryHUD" type="CanvasLayer"]
+script = ExtResource("1_qg440")
+billboard_sprite_scene = ExtResource("2_iqn5b")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 400.0
+offset_bottom = 648.0
+
+[node name="SpriteButton" type="Button" parent="Panel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.0
+offset_top = -68.0
+offset_right = 68.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+tooltip_text = "Godot Logo"
+icon = ExtResource("2_kpsb5")
+
+[node name="CloseButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_right = 50.0
+offset_bottom = 40.0
+text = "Close"
+
+[connection signal="pressed" from="Panel/SpriteButton" to="." method="_select_item"]
+[connection signal="pressed" from="Panel/CloseButton" to="." method="_close_inventory"]

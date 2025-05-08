@@ -1,41 +1,77 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjs3v33r83mec"]
+[gd_scene load_steps=4 format=3 uid="uid://bjs3v33r83mec"]
 
 [ext_resource type="Script" path="res://Scripts/GeneralScripts/JournalManager.gd" id="1_xhhvi"]
+
+[sub_resource type="Gradient" id="Gradient_tc3jn"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ktddy"]
+gradient = SubResource("Gradient_tc3jn")
 
 [node name="Journal" type="Node2D"]
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_xhhvi")
 
 [node name="Background" type="ColorRect" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GradientTexture" type="TextureRect" parent="Control/Background"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_ktddy")
 
 [node name="TextEdit" type="TextEdit" parent="Control"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -287.5
+offset_top = -250.0
+offset_right = 287.5
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -65.0
+offset_right = 100.0
+offset_bottom = -25.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="SaveButton" type="Button" parent="Control/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Save Entry"
 
 [node name="CloseButton" type="Button" parent="Control/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+text = "Close"
 
 [connection signal="text_changed" from="Control/TextEdit" to="Control" method="_on_text_edit_text_changed"]
 [connection signal="pressed" from="Control/HBoxContainer/SaveButton" to="Control" method="_on_save_button_pressed"]

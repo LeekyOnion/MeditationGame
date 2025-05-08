@@ -10,7 +10,7 @@ var current_gradient: Gradient
 var word_count: int = 0
 var base_hue: float = randf()
 # Load a simple circle texture (create one in your project)
-var splotch_texture = preload("res://circle.png")
+var splotch_texture = preload("uid://b648eka5hostc")
 
 func _ready():
 	current_gradient = Gradient.new()

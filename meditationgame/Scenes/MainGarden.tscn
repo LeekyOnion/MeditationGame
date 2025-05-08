@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=6 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_s5jug"]
+[ext_resource type="PackedScene" uid="uid://vhjn3lob5sp" path="res://Scenes/ChildScenes/AustinDraw.tscn" id="2_odbys"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="3_6er30"]
+[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="4_bjlcb"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_h4viv"]
 
 [node name="MainGarden" type="Node3D"]
 script = ExtResource("1_s5jug")
+
+[node name="AustinDraw" parent="." instance=ExtResource("2_odbys")]
+
+[node name="Hud" parent="." instance=ExtResource("3_6er30")]
+
+[node name="InventoryHUD" parent="." instance=ExtResource("4_bjlcb")]
+visible = false
+
+[node name="Journal" parent="." instance=ExtResource("4_h4viv")]
+visible = false
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(16, 16, 16)
