@@ -44,9 +44,9 @@ func load_last_time_opened() -> void:
 
 
 #Save the last timethe game was opened to a file
-func save_last_time_opened(current_time: int) -> void:
+func save_last_time_opened(_current_time: int) -> void:
 	var config = ConfigFile.new()
-	config.set_value("timestamps", "last_time_opened", current_time)
+	config.set_value("timestamps", "last_time_opened", _current_time)
 	config.save(SAVE_PATH)
 
 

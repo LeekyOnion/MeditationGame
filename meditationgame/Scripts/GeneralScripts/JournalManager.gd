@@ -1,16 +1,19 @@
 extends Control
 
-@onready var text_edit = $TextEdit
-@onready var background = $Background  # Should be a ColorRect/Control node
-@onready var gradient_rect = $Background/GradientTexture
+#region VARIABLES
+@export var text_edit     : TextEdit
+@export var background    : ColorRect
+@export var gradient_rect : TextureRect 
 
-var main = MainGarden
+var main = Main_Garden # TODO
 
-var current_gradient: Gradient
-var word_count: int = 0
-var base_hue: float = randf()
+var current_gradient : Gradient
+var word_count       : int = 0
+var base_hue         : float = randf()
+
 # Load a simple circle texture (create one in your project)
-var splotch_texture = preload("uid://b648eka5hostc")
+var splotch_texture = preload("res://ArtAssets/Leaf.png")
+#endregion
 
 func _ready():
 	current_gradient = Gradient.new()
@@ -118,7 +121,6 @@ func _on_text_edit_text_changed() -> void:
 func _close_journal() -> void:
 	main.hud.visible = true
 	main.journal.visible = false
-
 
 func _on_close_button_pressed() -> void:
 	pass # Replace with function body.

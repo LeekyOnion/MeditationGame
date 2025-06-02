@@ -9,7 +9,7 @@ gradient = SubResource("Gradient_tc3jn")
 
 [node name="Journal" type="Node2D"]
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("text_edit", "background", "gradient_rect")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -17,6 +17,9 @@ offset_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("1_xhhvi")
+text_edit = NodePath("Textbox")
+background = NodePath("Background")
+gradient_rect = NodePath("Background/Background_Gradient_Texture")
 
 [node name="Background" type="ColorRect" parent="Control"]
 layout_mode = 1
@@ -26,7 +29,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GradientTexture" type="TextureRect" parent="Control/Background"]
+[node name="Background_Gradient_Texture" type="TextureRect" parent="Control/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -35,7 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_ktddy")
 
-[node name="TextEdit" type="TextEdit" parent="Control"]
+[node name="Textbox" type="TextEdit" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,30 +52,29 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-layout_mode = 1
+[node name="Journal Buttons" type="HBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -65.0
-offset_right = 100.0
-offset_bottom = -25.0
+offset_left = 476.0
+offset_top = 583.0
+offset_right = 676.0
+offset_bottom = 623.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="SaveButton" type="Button" parent="Control/HBoxContainer"]
+[node name="SaveButton" type="Button" parent="Journal Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Save Entry"
 
-[node name="CloseButton" type="Button" parent="Control/HBoxContainer"]
+[node name="CloseButton" type="Button" parent="Journal Buttons"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Close"
 
-[connection signal="text_changed" from="Control/TextEdit" to="Control" method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="Control/HBoxContainer/SaveButton" to="Control" method="_on_save_button_pressed"]
-[connection signal="pressed" from="Control/HBoxContainer/CloseButton" to="Control" method="_close_journal"]
+[connection signal="text_changed" from="Control/Textbox" to="Control" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="Journal Buttons/SaveButton" to="Control" method="_on_save_button_pressed"]
+[connection signal="pressed" from="Journal Buttons/CloseButton" to="Control" method="_close_journal"]

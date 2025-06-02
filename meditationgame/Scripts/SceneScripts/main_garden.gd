@@ -1,6 +1,5 @@
 extends Node
-
-class_name MainGarden
+class_name Main_Garden
 
 
 #References to different hud elements / screens and the grid map that decorations are placed on.

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ckpt0sc2l85iv"]
+
+[node name="Object_Parent" type="RigidBody2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+
+[node name="Collider" type="CollisionShape2D" parent="."]

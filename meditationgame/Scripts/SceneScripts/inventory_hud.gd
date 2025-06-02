@@ -6,7 +6,7 @@ class_name InventoryHUD
 
 @onready var sprite_button = %SpriteButton
 
-var main : MainGarden
+var main : Main_Garden
 
 func _select_item() -> void:
 	#Pressing a decoration button on the inventory HUD will call this function through a signal,

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4nibfb7rqtii"]
+
+[ext_resource type="PackedScene" uid="uid://ckpt0sc2l85iv" path="res://Scenes/Objects/Base Objects/Object_Parent.tscn" id="1_b4ua5"]
+
+[node name="Object_Animation_Parent" instance=ExtResource("1_b4ua5")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+anim_player = NodePath("../AnimationPlayer")
