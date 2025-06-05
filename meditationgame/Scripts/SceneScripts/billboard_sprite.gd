@@ -1,7 +1,10 @@
-#Manages the functionality for each billboard sprite spawned in as a decoration
-#from the MainGarden inventory HUD.
-#Raycast code from here and AustinDraw can probably be made into its own class,
-#as it is the same code between the two.
+"""
+Manages the functionality for each billboard sprite spawned in as a decoration
+from the MainGarden inventory HUD.
+
+Raycast code from here and AustinDraw can probably be made into its own class,
+as it is the same code between the two.
+"""
 extends Node3D
 class_name BillboardSprite
 

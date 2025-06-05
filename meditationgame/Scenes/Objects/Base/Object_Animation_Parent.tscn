@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://4nibfb7rqtii"]
 
-[ext_resource type="PackedScene" uid="uid://ckpt0sc2l85iv" path="res://Scenes/Objects/Base Objects/Object_Parent.tscn" id="1_b4ua5"]
+[ext_resource type="PackedScene" uid="uid://ckpt0sc2l85iv" path="res://Scenes/Objects/Base/Object_Parent.tscn" id="1_b4ua5"]
 
 [node name="Object_Animation_Parent" instance=ExtResource("1_b4ua5")]
 

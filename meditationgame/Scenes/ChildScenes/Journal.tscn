@@ -1,27 +1,25 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjs3v33r83mec"]
 
-[ext_resource type="Script" path="res://Scripts/GeneralScripts/JournalManager.gd" id="1_xhhvi"]
+[ext_resource type="Script" path="res://Scripts/GeneralScripts/Journal_Controller.gd" id="1_8cehn"]
 
 [sub_resource type="Gradient" id="Gradient_tc3jn"]
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ktddy"]
 gradient = SubResource("Gradient_tc3jn")
 
-[node name="Journal" type="Node2D"]
-
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("text_edit", "background", "gradient_rect")]
+[node name="Journal" type="Control" node_paths=PackedStringArray("text_edit", "background", "gradient_rect")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_xhhvi")
+script = ExtResource("1_8cehn")
 text_edit = NodePath("Textbox")
 background = NodePath("Background")
 gradient_rect = NodePath("Background/Background_Gradient_Texture")
 
-[node name="Background" type="ColorRect" parent="Control"]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,7 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background_Gradient_Texture" type="TextureRect" parent="Control/Background"]
+[node name="Background_Gradient_Texture" type="TextureRect" parent="Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,7 +36,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_ktddy")
 
-[node name="Textbox" type="TextEdit" parent="Control"]
+[node name="Textbox" type="TextEdit" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,15 +51,16 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Journal Buttons" type="HBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 476.0
-offset_top = 583.0
-offset_right = 676.0
-offset_bottom = 623.0
+offset_left = -100.0
+offset_top = -65.0
+offset_right = 100.0
+offset_bottom = -25.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -75,6 +74,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "Close"
 
-[connection signal="text_changed" from="Control/Textbox" to="Control" method="_on_text_edit_text_changed"]
-[connection signal="pressed" from="Journal Buttons/SaveButton" to="Control" method="_on_save_button_pressed"]
-[connection signal="pressed" from="Journal Buttons/CloseButton" to="Control" method="_close_journal"]
+[connection signal="caret_changed" from="Textbox" to="." method="_on_textbox_caret_changed"]
+[connection signal="pressed" from="Journal Buttons/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Journal Buttons/CloseButton" to="." method="_on_close_button_pressed"]

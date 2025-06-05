@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmyixwun1utuy"]
+
+[ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_gb8fm"]
+[ext_resource type="PackedScene" uid="uid://vhjn3lob5sp" path="res://Scenes/ChildScenes/AustinDraw.tscn" id="2_l0qxh"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="3_8684g"]
+[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="4_rfsg0"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="5_j4kh2"]
+
+[node name="MainGarden" type="Node3D" node_paths=PackedStringArray("hud", "journal", "inventory_hud", "tile")]
+script = ExtResource("1_gb8fm")
+hud = NodePath("HUD_Game_Select")
+journal = NodePath("Journal")
+inventory_hud = NodePath("HUD_Inventory")
+tile = NodePath("GridMap")
+
+[node name="AustinDraw" parent="." instance=ExtResource("2_l0qxh")]
+
+[node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("3_8684g")]
+main = NodePath("..")
+
+[node name="HUD_Inventory" parent="." instance=ExtResource("4_rfsg0")]
+visible = false
+
+[node name="Journal" parent="." instance=ExtResource("5_j4kh2")]
+visible = false
+
+[node name="GridMap" type="GridMap" parent="."]
+cell_size = Vector3(16, 16, 16)
+
+[connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]

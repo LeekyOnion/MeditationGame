@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://bj7k5rms4bygv"]
 
-[ext_resource type="Script" path="res://Scripts/SceneScripts/hud.gd" id="1_6vv1g"]
+[ext_resource type="Script" path="res://Scripts/SceneScripts/hud_manager.gd" id="1_6vv1g"]
 
 [node name="Hud" type="CanvasLayer"]
 script = ExtResource("1_6vv1g")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="Journal Container" type="MarginContainer" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -13,14 +13,17 @@ offset_left = -40.0
 offset_bottom = 40.0
 grow_horizontal = 0
 
-[node name="Journal" type="Button" parent="MarginContainer"]
+[node name="Journal" type="Button" parent="Journal Container"]
 layout_mode = 2
 text = "Journal"
 
-[node name="Inventory" type="Button" parent="."]
+[node name="Inventory Container" type="MarginContainer" parent="."]
 offset_right = 83.0
 offset_bottom = 40.0
+
+[node name="Inventory" type="Button" parent="Inventory Container"]
+layout_mode = 2
 text = "Inventory"
 
-[connection signal="pressed" from="MarginContainer/Journal" to="." method="_open_journal"]
-[connection signal="pressed" from="Inventory" to="." method="_open_inventory"]
+[connection signal="pressed" from="Journal Container/Journal" to="." method="_open_journal"]
+[connection signal="pressed" from="Inventory Container/Inventory" to="." method="_open_inventory"]

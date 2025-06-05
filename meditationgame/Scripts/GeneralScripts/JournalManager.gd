@@ -1,18 +1,19 @@
 extends Control
 
 #region VARIABLES
+
 @export var text_edit     : TextEdit
 @export var background    : ColorRect
 @export var gradient_rect : TextureRect 
 
-var main = Main_Garden # TODO
-
-var current_gradient : Gradient
-var word_count       : int = 0
-var base_hue         : float = randf()
+var current_gradient      : Gradient
+var word_count            : int       = 0
+var base_hue              : float     = randf()
 
 # Load a simple circle texture (create one in your project)
 var splotch_texture = preload("res://ArtAssets/Leaf.png")
+var main = Main_Garden # TODO
+
 #endregion
 
 func _ready():

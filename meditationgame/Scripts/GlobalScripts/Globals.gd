@@ -16,7 +16,6 @@ var last_time_opened: int = 0
 # Word bank to be used when you eventually update the journal
 var word_bank = ["Tree", "Bubble"]
 
-
 func _ready() -> void:
 	# Load the last saved timestamp
 	load_last_time_opened()
@@ -60,7 +59,6 @@ func format_time_difference(seconds: int) -> String:
 	seconds %= 60
 
 	return "%d days, %d hours, %d minutes, %d seconds" % [days, hours, minutes, seconds]
-
 
 func _notification(what: int) -> void:
 	# Detect when the game is about to close

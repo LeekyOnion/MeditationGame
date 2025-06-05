@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Leaf_Model" load_steps=2 format=3 uid="uid://bnx5qhvah6kpk"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Leaf/Leaf_Model.gd" id="1_ompoe"]
+
+[resource]
+script = ExtResource("1_ompoe")
+delete_timer = 5.0
+fall_speed = 100.0
