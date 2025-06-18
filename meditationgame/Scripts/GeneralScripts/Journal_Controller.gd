@@ -17,6 +17,7 @@ var _num_generator : RandomNumberGenerator = RandomNumberGenerator.new()
 var _leaf_counter  : int = 0
 
 # PRELOADS
+#var leaf_scene = preload("res://Scenes/Objects/Leaf/Leaf.tscn")
 var leaf_scene = preload("res://Scenes/Objects/Leaf/Leaf.tscn")
 #endregion VARIABLES
 
@@ -52,12 +53,18 @@ func _set_leaf_pos(leaf_instance : Leaf_Object) -> void:
 	# Get Viewport Information
 	# TODO : Have the leaves randomly generate from the top of the viewport
 	var viewport_size = get_viewport_rect().size
-	var leaf_pos      = viewport_size / 2.0
+	var leaf_pos      = Vector2(viewport_size.x - _num_generator.randf_range(0, viewport_size.x), # x
+								0)                                                                # y
 	
 	leaf_instance.global_position = leaf_pos
-	
-#endregion SELF FUNCTIONS
 
+#func _set_leaf_scale(leaf_instance : Leaf_Object) -> void:
+	#leaf_instance.scale = Vector2(leaf_instance.scale_size, leaf_instance.scale_size)
+	
+func _move_leaves() -> void:
+	pass
+#endregion SELF FUNCTIONS
+	
 #region SIGNAL FUNCTIONS
 func _on_close_button_pressed() -> void:  # Emits on Close Button pressed
 	print("Journal: _on_close_button_pressed(): Exiting. Emitting close_journal")

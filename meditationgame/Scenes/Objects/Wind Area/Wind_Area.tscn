@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://byaqyhjdfic8p"]
+
+[ext_resource type="Script" path="res://Scenes/Objects/Wind Area/Wind_Area.gd" id="1_byg5y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sma5o"]
+
+[node name="Wind Area" type="Area2D" node_paths=PackedStringArray("detection_area")]
+collision_layer = 12
+collision_mask = 12
+priority = 2
+script = ExtResource("1_byg5y")
+windbox_size_x = 100.0
+windbox_size_y = 100.0
+windbox_range_lift_max = -0.67
+windbox_range_lift_min = -0.33
+windbox_range_lr_max = -0.33
+windbox_range_lr_min = 0.33
+detection_area = NodePath("Detection")
+
+[node name="Detection" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_sma5o")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

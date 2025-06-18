@@ -1,9 +1,14 @@
-[gd_scene load_steps=7 format=3 uid="uid://bye5l1ao128jc"]
+[gd_scene load_steps=8 format=3 uid="uid://bye5l1ao128jc"]
 
 [ext_resource type="PackedScene" uid="uid://4nibfb7rqtii" path="res://Scenes/Objects/Base/Object_Animation_Parent.tscn" id="1_kyiyb"]
 [ext_resource type="Texture2D" uid="uid://neecs0oxk3xu" path="res://ArtAssets/Leaf.png" id="2_o810m"]
 [ext_resource type="Script" path="res://Scenes/Objects/Leaf/Leaf_Controller.gd" id="2_owrp1"]
-[ext_resource type="Resource" uid="uid://bnx5qhvah6kpk" path="res://Scenes/Objects/Leaf/Leaf_Stats.tres" id="3_cid8u"]
+[ext_resource type="Script" path="res://Scenes/Objects/Leaf/Leaf_Model.gd" id="3_1b38v"]
+
+[sub_resource type="Resource" id="Resource_g1baq"]
+script = ExtResource("3_1b38v")
+delete_timer = 5.0
+fall_speed = 0.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_xrijk"]
 radius = 304.002
@@ -11,17 +16,19 @@ radius = 304.002
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kxny0"]
 
 [node name="Leaf" node_paths=PackedStringArray("delete_timer") instance=ExtResource("1_kyiyb")]
-collision_layer = 0
+collision_layer = 8
+collision_mask = 4
 mass = 0.001
+gravity_scale = 0.285
 script = ExtResource("2_owrp1")
-Leaf = ExtResource("3_cid8u")
+leaf_data = SubResource("Resource_g1baq")
 delete_timer = NodePath("Delete Timer")
+scale_size = 0.125
 
 [node name="Sprite" parent="." index="0"]
 texture = ExtResource("2_o810m")
 
 [node name="Collider" parent="." index="1"]
-position = Vector2(10, 5)
 shape = SubResource("CircleShape2D_xrijk")
 
 [node name="AnimationTree" parent="." index="3"]
@@ -33,4 +40,10 @@ wait_time = 5.0
 one_shot = true
 autostart = true
 
+[node name="Move Timer" type="Timer" parent="." index="5"]
+process_callback = 0
+wait_time = 0.25
+autostart = true
+
 [connection signal="timeout" from="Delete Timer" to="." method="_on_delete_timer_timeout"]
+[connection signal="timeout" from="Move Timer" to="." method="_on_move_timer_timeout"]
