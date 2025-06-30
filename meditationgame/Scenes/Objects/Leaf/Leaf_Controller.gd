@@ -18,20 +18,21 @@ var _num_generator : RandomNumberGenerator = RandomNumberGenerator.new()
 func _ready() -> void:
 	if is_instance_valid(delete_timer):
 		#apply_scale(Vector2(scale_size, scale_size))
-		print("Leaf Scale: ",  scale)
+		#print("Leaf_Controller: Leaf Scale: ",  scale)
 		#delete_timer.start()
+		pass
 	else:
-		printerr("Leaf_Object: 'delete_timer' is not assigned or not a valid Timer node.")
+		printerr("Leaf: 'delete_timer' is not assigned or not a valid Timer node.")
 	
 	if is_instance_valid(_sprite):
 		_sprite.scale = Vector2(scale_size, scale_size)
 	else:
-		printerr("Leaf_Object: '_sprite' is not found.")
+		printerr("Leaf: '_sprite' is not found.")
 	
 	if is_instance_valid(_collider):
 		_collider.scale = Vector2(scale_size, scale_size)
 	else:
-		printerr("Leaf_Object: '_collider' is not found.")
+		printerr("Leaf: '_collider' is not found.")
 	
 func _process(_delta: float) -> void:
 	pass
@@ -43,12 +44,15 @@ func _on_delete_timer_timeout() -> void: # Self Delete
 
 func _on_move_timer_timeout() -> void:   # Determines if it should updraft
 	var temp_num : int = 0
-	temp_num   = _num_generator.randi_range(0,9)
-	var temp_x = _num_generator.randf_range(-0.33, 0)
-	var temp_y = _num_generator.randf_range(0, -0.33)
+	temp_num   = _num_generator.randi_range(0,99)
+	var temp_x = _num_generator.randf_range(-5, 0)
+	var temp_y = _num_generator.randf_range(0, -5)
 	#print("Journal: _on_textbox_carent_changed(): temp_num is: ", temp_num)
-	if temp_num > 6:
-		apply_impulse(Vector2(temp_x, temp_y)) # Vector2(x, y)
+	if temp_num > 60:
+		apply_force(Vector2(temp_x, temp_y)) # Vector2(x, y)
+	elif temp_num < 10 :
+		apply_force(Vector2((_num_generator.randf_range(-5,5)), 
+							(_num_generator.randf_range(-7.5,-2.5))))
 	else:
 		pass
 	pass

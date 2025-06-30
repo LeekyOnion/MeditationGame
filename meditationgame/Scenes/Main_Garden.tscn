@@ -26,5 +26,6 @@ visible = false
 
 [node name="GridMap" type="GridMap" parent="."]
 cell_size = Vector3(16, 16, 16)
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
 [connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]

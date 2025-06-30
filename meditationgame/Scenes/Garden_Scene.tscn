@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cin3rxspjvl1t"]
+
+[ext_resource type="PackedScene" uid="uid://c02s1klni5a7c" path="res://Scenes/Objects/Garden/Garden_Object.tscn" id="1_mx27q"]
+
+[node name="Garden" type="Node3D"]
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 15, 30)
+
+[node name="Garden" parent="." instance=ExtResource("1_mx27q")]

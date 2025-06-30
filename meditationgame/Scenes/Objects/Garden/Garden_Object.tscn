@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c02s1klni5a7c"]
+
+[ext_resource type="PackedScene" uid="uid://vhjn3lob5sp" path="res://Scenes/ChildScenes/AustinDraw.tscn" id="1_lj10f"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_sj6aq"]
+size = Vector2(50, 50)
+orientation = 1
+
+[node name="Garden" type="MeshInstance3D"]
+mesh = SubResource("QuadMesh_sj6aq")
+
+[node name="AustinDraw" parent="." node_paths=PackedStringArray("mesh") instance=ExtResource("1_lj10f")]
+mesh = NodePath("..")

@@ -8,9 +8,9 @@ signal save_journal
 
 #region VARIABLES
 # EXPORTS
-@export var text_edit     : TextEdit
-@export var background    : ColorRect
-@export var gradient_rect : TextureRect
+# @export var text_edit     : TextEdit
+# @export var background    : ColorRect
+# @export var gradient_rect : TextureRect
 
 # SELF
 var _num_generator : RandomNumberGenerator = RandomNumberGenerator.new()
@@ -24,11 +24,11 @@ var leaf_scene = preload("res://Scenes/Objects/Leaf/Leaf.tscn")
 #region COROUTINES
 func _ready():
 	if leaf_scene:
-		print("Leaf: Leaf Scene successfully loaded!")
+		print("Journal: Leaf Scene successfully loaded!")
 	elif not leaf_scene:
-		print("Leaf: Leaf Scene Not Loaded!")
+		print("Journal: Leaf Scene Not Loaded!")
 	else:
-		print("No Leaf Scene implemented!")
+		print("Journal: No Leaf Scene implemented!")
 #endregion COROUTINES
 
 #region SELF FUNCTIONS
