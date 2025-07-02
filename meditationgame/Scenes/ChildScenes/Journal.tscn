@@ -17,6 +17,7 @@ size_flags_vertical = 3
 script = ExtResource("1_8cehn")
 
 [node name="Background" type="ColorRect" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,6 +26,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Background_Gradient_Texture" type="TextureRect" parent="Background"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

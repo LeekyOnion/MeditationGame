@@ -1,19 +1,145 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=19 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_gb8fm"]
-[ext_resource type="PackedScene" uid="uid://vhjn3lob5sp" path="res://Scenes/ChildScenes/AustinDraw.tscn" id="2_l0qxh"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="3_8684g"]
 [ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="4_rfsg0"]
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="5_j4kh2"]
+[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Building.tscn" id="5_ujr3m"]
 
-[node name="MainGarden" type="Node3D" node_paths=PackedStringArray("hud", "journal", "inventory_hud", "tile")]
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
+
+[sub_resource type="Sky" id="Sky_ym75h"]
+sky_material = SubResource("ProceduralSkyMaterial_437dt")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_e0nwy"]
+background_mode = 2
+background_color = Color(0.497474, 0.497474, 0.497474, 1)
+sky = SubResource("Sky_ym75h")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="Shader" id="Shader_ms3av"]
+code = "/*
+
+SAND OBJECT
+
+*/
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ybdb2"]
+noise_type = 0
+frequency = 0.2555
+fractal_type = 2
+fractal_octaves = 8
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cx700"]
+noise = SubResource("FastNoiseLite_ybdb2")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rwn4"]
+render_priority = 0
+shader = SubResource("Shader_ms3av")
+shader_parameter/albedo = Color(0.772549, 0.701961, 0.635294, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = SubResource("NoiseTexture2D_cx700")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5kamx"]
+material = SubResource("ShaderMaterial_0rwn4")
+size = Vector2(10, 10)
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xyb2d"]
+noise_type = 0
+fractal_octaves = 8
+fractal_lacunarity = 3.335
+fractal_gain = 0.905
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 29.37
+domain_warp_frequency = 0.225
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1dyrb"]
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxh2q"]
+as_normal_map = true
+bump_strength = 4.3
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c27r"]
+albedo_color = Color(0.313268, 0.356105, 0.240722, 1)
+albedo_texture = SubResource("NoiseTexture2D_1dyrb")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_pxh2q")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ikpg"]
+material = SubResource("StandardMaterial3D_8c27r")
+size = Vector2(25, 25)
+orientation = 1
+
+[node name="MainGarden" type="Node3D" node_paths=PackedStringArray("hud", "journal", "inventory_hud")]
 script = ExtResource("1_gb8fm")
 hud = NodePath("HUD_Game_Select")
 journal = NodePath("Journal")
 inventory_hud = NodePath("HUD_Inventory")
-tile = NodePath("GridMap")
 
-[node name="AustinDraw" parent="." instance=ExtResource("2_l0qxh")]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-1, 6.18172e-08, -6.18172e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.47106, -5.98632)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_e0nwy")
+
+[node name="Game Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.2, 0.564656)
 
 [node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("3_8684g")]
 main = NodePath("..")
@@ -24,8 +150,24 @@ visible = false
 [node name="Journal" parent="." instance=ExtResource("5_j4kh2")]
 visible = false
 
-[node name="GridMap" type="GridMap" parent="."]
-cell_size = Vector3(16, 16, 16)
-metadata/_editor_floor_ = Vector3(0, 1, 0)
+[node name="Building" parent="." instance=ExtResource("5_ujr3m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="Sand" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.465)
+
+[node name="Sand Plane" type="MeshInstance3D" parent="Sand"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.53)
+sorting_offset = 50000.0
+sorting_use_aabb_center = false
+mesh = SubResource("QuadMesh_5kamx")
+
+[node name="Grass" type="Node3D" parent="."]
+
+[node name="Grass Plane" type="MeshInstance3D" parent="Grass"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035, -6.608)
+rotation_order = 0
+sorting_offset = -6.36
+mesh = SubResource("QuadMesh_5ikpg")
 
 [connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]
