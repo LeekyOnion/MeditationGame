@@ -1,6 +1,6 @@
 [gd_resource type="StandardMaterial3D" load_steps=7 format=3 uid="uid://8sdwtb0blj6h"]
 
-[ext_resource type="Texture2D" uid="uid://bqjle8y7xrw2u" path="res://Shaders/new_gradient_texture_2d.tres" id="1_j3wsa"]
+[ext_resource type="Texture2D" uid="uid://bqjle8y7xrw2u" path="res://Shaders/Bamboo/new_gradient_texture_2d.tres" id="1_j3wsa"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_15k0j"]
 noise_type = 0

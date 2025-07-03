@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://chomftf8x1ac8"]
+
+[ext_resource type="Material" uid="uid://bhepvtds7pftc" path="res://Shaders/Sand/Sand_Shader.tres" id="1_dd1w7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5kamx"]
+lightmap_size_hint = Vector2i(52, 52)
+material = ExtResource("1_dd1w7")
+add_uv2 = true
+size = Vector2(10, 10)
+orientation = 1
+
+[node name="Sand Scene" type="Node3D"]
+
+[node name="Sand Plane" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.113156, -0.0163896, 0.0140596)
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+gi_mode = 2
+mesh = SubResource("QuadMesh_5kamx")

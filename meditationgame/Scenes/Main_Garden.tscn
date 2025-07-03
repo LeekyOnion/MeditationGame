@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=15 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_gb8fm"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="3_8684g"]
 [ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="4_rfsg0"]
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="5_j4kh2"]
 [ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Building.tscn" id="5_ujr3m"]
+[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Sand_Draw_Scene.tscn" id="6_jba4e"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
 
@@ -19,83 +20,8 @@ sky = SubResource("Sky_ym75h")
 ambient_light_source = 3
 reflected_light_source = 2
 
-[sub_resource type="Shader" id="Shader_ms3av"]
-code = "/*
-
-SAND OBJECT
-
-*/
-shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_burley, specular_schlick_ggx;
-
-uniform vec4 albedo : source_color;
-uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
-uniform float point_size : hint_range(0.1, 128.0, 0.1);
-
-uniform float roughness : hint_range(0.0, 1.0);
-uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
-uniform vec4 metallic_texture_channel;
-uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
-
-uniform float specular : hint_range(0.0, 1.0, 0.01);
-uniform float metallic : hint_range(0.0, 1.0, 0.01);
-
-uniform vec3 uv1_scale;
-uniform vec3 uv1_offset;
-uniform vec3 uv2_scale;
-uniform vec3 uv2_offset;
-
-void vertex() {
-	UV = UV * uv1_scale.xy + uv1_offset.xy;
-}
-
-void fragment() {
-	vec2 base_uv = UV;
-
-	vec4 albedo_tex = texture(texture_albedo, base_uv);
-	ALBEDO = albedo.rgb * albedo_tex.rgb;
-
-	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
-	METALLIC = metallic_tex * metallic;
-	SPECULAR = specular;
-
-	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
-	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
-	ROUGHNESS = roughness_tex * roughness;
-}
-"
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ybdb2"]
-noise_type = 0
-frequency = 0.2555
-fractal_type = 2
-fractal_octaves = 8
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cx700"]
-noise = SubResource("FastNoiseLite_ybdb2")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rwn4"]
-render_priority = 0
-shader = SubResource("Shader_ms3av")
-shader_parameter/albedo = Color(0.772549, 0.701961, 0.635294, 1)
-shader_parameter/point_size = 1.0
-shader_parameter/roughness = 1.0
-shader_parameter/metallic_texture_channel = null
-shader_parameter/specular = 0.5
-shader_parameter/metallic = 0.0
-shader_parameter/uv1_scale = Vector3(1, 1, 1)
-shader_parameter/uv1_offset = Vector3(0, 0, 0)
-shader_parameter/uv2_scale = Vector3(1, 1, 1)
-shader_parameter/uv2_offset = Vector3(0, 0, 0)
-shader_parameter/texture_albedo = SubResource("NoiseTexture2D_cx700")
-
-[sub_resource type="QuadMesh" id="QuadMesh_5kamx"]
-material = SubResource("ShaderMaterial_0rwn4")
-size = Vector2(10, 10)
-orientation = 1
-
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_xyb2d"]
-noise_type = 0
+frequency = 0.5
 fractal_octaves = 8
 fractal_lacunarity = 3.335
 fractal_gain = 0.905
@@ -105,9 +31,13 @@ domain_warp_amplitude = 29.37
 domain_warp_frequency = 0.225
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1dyrb"]
+width = 2048
+height = 2048
 noise = SubResource("FastNoiseLite_xyb2d")
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxh2q"]
+width = 1024
+height = 1024
 as_normal_map = true
 bump_strength = 4.3
 noise = SubResource("FastNoiseLite_xyb2d")
@@ -139,7 +69,8 @@ directional_shadow_mode = 1
 environment = SubResource("Environment_e0nwy")
 
 [node name="Game Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.984808, 0.173648, 0, -0.173648, 0.984808, 0, 1.2, 0.564656)
+transform = Transform3D(1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0, 1.5, 1)
+fov = 60.0
 
 [node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("3_8684g")]
 main = NodePath("..")
@@ -153,21 +84,16 @@ visible = false
 [node name="Building" parent="." instance=ExtResource("5_ujr3m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
-[node name="Sand" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -4.465)
+[node name="Ground" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
-[node name="Sand Plane" type="MeshInstance3D" parent="Sand"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.53)
-sorting_offset = 50000.0
+[node name="Sand Scene" parent="Ground" instance=ExtResource("6_jba4e")]
+
+[node name="Grass Plane" type="MeshInstance3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
+sorting_offset = -10.0
 sorting_use_aabb_center = false
-mesh = SubResource("QuadMesh_5kamx")
-
-[node name="Grass" type="Node3D" parent="."]
-
-[node name="Grass Plane" type="MeshInstance3D" parent="Grass"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.035, -6.608)
-rotation_order = 0
-sorting_offset = -6.36
 mesh = SubResource("QuadMesh_5ikpg")
+skeleton = NodePath("")
 
 [connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]
