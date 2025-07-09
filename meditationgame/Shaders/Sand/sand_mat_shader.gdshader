@@ -1,7 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bhepvtds7pftc"]
-
-[sub_resource type="Shader" id="Shader_ms3av"]
-code = "shader_type spatial;
+shader_type spatial;
 render_mode specular_schlick_ggx, diffuse_burley;
 /*
 OPENGL
@@ -28,16 +25,14 @@ uniform vec3 albedo2 : source_color;
 uniform float metallic : hint_range(0.0, 1.0) = 0;
 uniform float roughness : hint_range(0.0, 1.0) = 0.02;
 
+// Displacement Effect
+uniform sampler2D displacement;
+
 // Maps 1 and 2 for Parallaxing Effect
 uniform sampler2D normal_map;
 uniform sampler2D depth_map;
 uniform sampler2D normal_map2;
 uniform sampler2D depth_map2;
-
-// Time and movement of the Maps
-//uniform vec2 wave_dir = vec2(2.0, 0.0);
-//uniform vec2 wave_dir2 = vec2(0.0, 1.0);
-//uniform float time_scale : hint_range(0.0, 0.2, 0.005) = 0.025;
 
 // Scaling for the aggressiveness of wave distortions
 uniform float height_scale : hint_range(0.0, 1.0) = 0.03;
@@ -45,18 +40,6 @@ uniform float height_scale : hint_range(0.0, 1.0) = 0.03;
 // Textures for Depth
 uniform sampler2D DEPTH_TEXTURE : hint_depth_texture, filter_linear_mipmap;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
-
-// Colors for Depth
-//uniform vec4 color_deep : source_color;
-//uniform vec4 color_shallow : source_color;
-//uniform float beers_law = 2.0;
-//uniform float depth_offset = -0.75;
-
-// This is for making the water have a edge
-//uniform float edge_scale = 0.1;
-//uniform float near = 1.0;
-//uniform float far = 100.0;
-//uniform vec3 edge_color : source_color;
 
 // Out Variables Vertex
 varying vec3 frag_pos; // WORLD SPACE
@@ -80,26 +63,31 @@ float fresnel(float amount, vec3 normal, vec3 view)
 	return pow((1.0 - clamp(dot(normalize(normal), normalize(view)), 0.0, 1.0)), amount);
 }
 
-// Func to give the water a edge - figures out how far the mesh is from other meshes
-//float edge(float depth)
-//{
-	//depth = 1.0 - 2.0 * depth;
-	//return near * far / (far + depth * (near - far));
-//}
-
 // Calculate the TBN
+//mat3 Calculate_TBN(mat4 Model_Matrix, vec3 T, vec3 N)
+//{
+	//// Calculate Tangent, BiTangent and Normals into World Space
+	//vec3 Tangent   = normalize(mat3(Model_Matrix) * T);
+	//vec3 Normal    = normalize(mat3(Model_Matrix) * N);
+	//vec3 BiTangent = normalize(cross(Normal, Tangent));
+//
+	//// Create the TBN Matrix (Tangent to World Space)
+	//mat3 TBN = transpose(mat3(Tangent, BiTangent, Normal));
+//
+	//// Return TBN
+	//return TBN;
+//
+
 mat3 Calculate_TBN(mat4 Model_Matrix, vec3 T, vec3 N)
 {
-	// Calculate Tangent, BiTangent and Normals into World Space
-	vec3 Tangent   = normalize(mat3(Model_Matrix) * T);
-	vec3 Normal    = normalize(mat3(Model_Matrix) * N);
-	vec3 BiTangent = normalize(cross(Normal, Tangent));
+    // Calculate Tangent, BiTangent and Normals into World Space
+    vec3 Tangent   = normalize(mat3(Model_Matrix) * T);
+    vec3 Normal    = normalize(mat3(Model_Matrix) * N);
 
-	// Create the TBN Matrix (Tangent to World Space)
-	mat3 TBN = transpose(mat3(Tangent, BiTangent, Normal));
+    vec3 BiTangent = normalize(cross(Tangent, Normal));
+    mat3 TBN = transpose(mat3(Tangent, BiTangent, Normal));
 
-	// Return TBN
-	return TBN;
+    return TBN;
 }
 
 void vertex() {
@@ -114,8 +102,6 @@ void vertex() {
 	tangent_view_pos = TBN * CAMERA_POSITION_WORLD;
 	tangent_frag_pos = TBN * frag_pos;
 	test = vec3(abs(dot(transpose(TBN)[2], transpose(TBN)[1])));
-	//UV = vec2(UV.x + (time_scale * TIME * uv_x_mod), UV.y-(time_scale * TIME * uv_y_mod)) * uv_scale;
-	//UV2 = vec2(UV2.x + (time_scale * TIME * uv2_x_mod), UV2.y-(time_scale * TIME * uv2_y_mod)) * uv2_scale;
 	UV  = vec2(UV.x  , UV.y) * uv_scale;
 	UV2 = vec2(UV2.x , UV2.y) * uv2_scale;
 }
@@ -123,18 +109,19 @@ void vertex() {
 vec2 ParallaxMapping(vec2 _uv, vec3 View_Direction)
 {
 	// STEEP PARALLAX MAPPING
-	const float minLayers = 32.0;
-	const float maxLayers = 128.0;
+	const float minLayers = 64.0;
+	const float maxLayers = 258.0;
 
 	//const float numLayers = 10.0;
 	float numLayers = mix(maxLayers, minLayers, abs(dot(vec3(0.0,0.0,1.0), View_Direction)));
 	float layerDepth = 1.0 / numLayers;
 	float currentLayerDepth = 0.0;
 
-	vec2 p = View_Direction.xy * height_scale;
+	float view_z = max(View_Direction.z, 0.001); // Avoid division by zero, ensure positive
+	vec2 p = View_Direction.xy / view_z * height_scale;
 	vec2 DeltaTexCoords = p / numLayers;
 	vec2 tempUV = _uv;
-	float currentDepthMapValue = texture(depth_map, tempUV).r;
+	float currentDepthMapValue = 1.0 - texture(depth_map, tempUV).r;
 
 	while (currentLayerDepth < currentDepthMapValue)
 	{
@@ -157,6 +144,19 @@ vec2 ParallaxMapping(vec2 _uv, vec3 View_Direction)
 
 void fragment()
 {
+	// DISPLACEMENT
+	vec3 displace_out;
+	displace_out = vec3(0.0, 0.0, 0.0);
+	{
+		vec3 duv = vec3(4.0 / 512.0, 4.0 / 512.0, 0);
+		float v1 = texture(displacement, UV - duv.xz).y;
+		float v2 = texture(displacement, UV + duv.xz).y;
+		float v3 = texture(displacement, UV - duv.zy).y;
+		float v4 = texture(displacement, UV + duv.zy).y;
+		
+		displace_out = normalize(vec3(v1 - v2, v3 - v4, 0.3));
+	}
+	
 	/// DEPTH MATH
 	// Code to make the water function as water or light blocking - depth variables
 	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).r * 2.0 -1.0;
@@ -167,16 +167,6 @@ void fragment()
 
 	// Color for the depth
 	vec3 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, depth_blend_power * 2.5).rgb;
-	//vec3 depth_color = mix(color_shallow.rgb, color_deep.rgb, depth_blend_power);
-	//vec3 color = mix(screen_color * depth_color, depth_color * 0.25, depth_blend_power * 0.5);
-	//vec3 color = mix(screen_color * depth_color, depth_color * 0.25, depth_blend_power * 0.5);
-	// Getting the edge calculations
-	//float z_depth = edge(texture(DEPTH_TEXTURE, SCREEN_UV).x);
-	//float z_pos = edge(FRAGCOORD.z);
-	//float z_dif = z_depth - z_pos;
-	
-	// Make the Depth Color
-	//vec3 depth_color_adj = mix(edge_color, color, step(edge_scale, z_dif));
 	
 	// Calculations for the Fresnel Effect
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
@@ -197,8 +187,10 @@ void fragment()
 	vec3 AdjustedNormal1 = texture(normal_map, AdjustedUV).rgb;
 	vec3 AdjustedNormal2 = texture(normal_map2, AdjustedUV2).rgb;
 
-	// MIX THESE OUTPUTS
-	vec3 FinalNormal = mix(AdjustedNormal1, AdjustedNormal2, 0.5);
+	// MIX THESE OUTPUT OF ADJUSTED NORMALS
+	vec3 FinalAdjustedNormal = mix(AdjustedNormal1, AdjustedNormal2, 0.5);
+	
+	vec3 FinalNormal = FinalAdjustedNormal;
 
 	// FINAL OUTPUTS
 	METALLIC = metallic;
@@ -206,40 +198,3 @@ void fragment()
 	NORMAL_MAP = FinalNormal;
 	ALBEDO = clamp(surface_color, vec3(0.0), vec3(1.0));
 }
-"
-
-[sub_resource type="Gradient" id="Gradient_yysnv"]
-colors = PackedColorArray(0.205117, 0.205117, 0.205117, 1, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_s7728"]
-noise_type = 3
-frequency = 0.0071
-offset = Vector3(-275, 0, 0)
-fractal_lacunarity = 2.145
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nvlsk"]
-width = 1024
-height = 1024
-seamless = true
-as_normal_map = true
-color_ramp = SubResource("Gradient_yysnv")
-noise = SubResource("FastNoiseLite_s7728")
-
-[resource]
-render_priority = 0
-shader = SubResource("Shader_ms3av")
-shader_parameter/albedo = Color(0.772549, 0.701961, 0.635294, 1)
-shader_parameter/albedo2 = Color(0, 0, 0, 1)
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.85
-shader_parameter/height_scale = 0.073
-shader_parameter/uv_x_mod = 0.0
-shader_parameter/uv_y_mod = 0.0
-shader_parameter/uv2_x_mod = 0.0
-shader_parameter/uv2_y_mod = 0.0
-shader_parameter/uv_scale = 1.0
-shader_parameter/uv2_scale = 1.0
-shader_parameter/normal_map = SubResource("NoiseTexture2D_nvlsk")
-shader_parameter/depth_map = SubResource("NoiseTexture2D_nvlsk")
-shader_parameter/normal_map2 = SubResource("NoiseTexture2D_nvlsk")
-shader_parameter/depth_map2 = SubResource("NoiseTexture2D_nvlsk")

@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://dmyixwun1utuy"]
 
-[ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_gb8fm"]
-[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="3_8684g"]
-[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="4_rfsg0"]
-[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="5_j4kh2"]
-[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Building.tscn" id="5_ujr3m"]
-[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Sand_Draw_Scene.tscn" id="6_jba4e"]
+[ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_x48w0"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="2_r4oro"]
+[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="3_limt0"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_hy5ox"]
+[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Objects/Building/Building.tscn" id="5_4ib0h"]
+[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="6_2iyf1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
 
@@ -54,7 +54,7 @@ size = Vector2(25, 25)
 orientation = 1
 
 [node name="MainGarden" type="Node3D" node_paths=PackedStringArray("hud", "journal", "inventory_hud")]
-script = ExtResource("1_gb8fm")
+script = ExtResource("1_x48w0")
 hud = NodePath("HUD_Game_Select")
 journal = NodePath("Journal")
 inventory_hud = NodePath("HUD_Inventory")
@@ -70,24 +70,25 @@ environment = SubResource("Environment_e0nwy")
 
 [node name="Game Camera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0, 1.5, 1)
+cull_mask = 524287
 fov = 60.0
 
-[node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("3_8684g")]
+[node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("2_r4oro")]
 main = NodePath("..")
 
-[node name="HUD_Inventory" parent="." instance=ExtResource("4_rfsg0")]
+[node name="HUD_Inventory" parent="." instance=ExtResource("3_limt0")]
 visible = false
 
-[node name="Journal" parent="." instance=ExtResource("5_j4kh2")]
+[node name="Journal" parent="." instance=ExtResource("4_hy5ox")]
 visible = false
 
-[node name="Building" parent="." instance=ExtResource("5_ujr3m")]
+[node name="Building" parent="." instance=ExtResource("5_4ib0h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="Ground" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
-[node name="Sand Scene" parent="Ground" instance=ExtResource("6_jba4e")]
+[node name="Sand Scene" parent="Ground" instance=ExtResource("6_2iyf1")]
 
 [node name="Grass Plane" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)
