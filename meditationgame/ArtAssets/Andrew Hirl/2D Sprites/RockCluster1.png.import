@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c458sn01sbjmv"
-path.s3tc="res://.godot/imported/Pampas Grass.svg-fd67adba6110803c12aec18f0dbd0c8c.s3tc.ctex"
+uid="uid://nd27vqv4xl8r"
+path.s3tc="res://.godot/imported/RockCluster1.png-16cf20dc684e843ce8e253d8cf78883b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ArtAssets/Andrew Hirl/2D Sprites/Pampas Grass.svg"
-dest_files=["res://.godot/imported/Pampas Grass.svg-fd67adba6110803c12aec18f0dbd0c8c.s3tc.ctex"]
+source_file="res://ArtAssets/Andrew Hirl/2D Sprites/RockCluster1.png"
+dest_files=["res://.godot/imported/RockCluster1.png-16cf20dc684e843ce8e253d8cf78883b.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +33,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ck15wyww1n0ry"
-path.s3tc="res://.godot/imported/Lone Rock 1.svg-bd81bcf1c9d585ef0cdc4801e170980a.s3tc.ctex"
+uid="uid://c8gbj31cc6qu"
+path.s3tc="res://.godot/imported/Rock2.png-8eb61388d655841a024868369e176a35.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://ArtAssets/Andrew Hirl/2D Sprites/Lone Rock 1.svg"
-dest_files=["res://.godot/imported/Lone Rock 1.svg-bd81bcf1c9d585ef0cdc4801e170980a.s3tc.ctex"]
+source_file="res://ArtAssets/Andrew Hirl/2D Sprites/Rock2.png"
+dest_files=["res://.godot/imported/Rock2.png-8eb61388d655841a024868369e176a35.s3tc.ctex"]
 
 [params]
 
@@ -33,6 +33,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=0
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false
