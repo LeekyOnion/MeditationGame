@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=19 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_x48w0"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="2_r4oro"]
@@ -6,6 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_hy5ox"]
 [ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Objects/Building/Building.tscn" id="5_4ib0h"]
 [ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="6_2iyf1"]
+[ext_resource type="PackedScene" uid="uid://dvf1yl11cik0w" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Journal_Place_Holder.fbx" id="7_dk3oq"]
+[ext_resource type="PackedScene" uid="uid://s4o5lmuutypd" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_ak88q"]
+[ext_resource type="PackedScene" uid="uid://ccex7nrene0g8" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Rake_Place_Holder.fbx" id="9_s4wp3"]
+[ext_resource type="PackedScene" uid="uid://du2cwhiwahoi3" path="res://ArtAssets/Andrew Hirl/Meshes/SM_SingingBowl_Place_Holder.fbx" id="10_ns5dn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
 
@@ -96,5 +100,17 @@ sorting_offset = -10.0
 sorting_use_aabb_center = false
 mesh = SubResource("QuadMesh_5ikpg")
 skeleton = NodePath("")
+
+[node name="SM_Journal_Place_Holder" parent="." instance=ExtResource("7_dk3oq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.48854, 0.0460072, -0.735571)
+
+[node name="SM_PrayerBeads_Place_Holder" parent="." instance=ExtResource("8_ak88q")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.403422, 0.0565856, -0.682537)
+
+[node name="SM_Rake_Place_Holder" parent="." instance=ExtResource("9_s4wp3")]
+transform = Transform3D(0.827581, 0, -0.561347, 0, 1, 0, 0.561347, 0, 0.827581, -0.227161, 0.0519684, -0.710122)
+
+[node name="SM_SingingBowl_Place_Holder" parent="." instance=ExtResource("10_ns5dn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2036, 0.0602901, -0.788017)
 
 [connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]
