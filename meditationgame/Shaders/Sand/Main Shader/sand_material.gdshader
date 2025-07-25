@@ -13,6 +13,8 @@ uniform sampler2D depth_map;
 uniform sampler2D normal_map2;
 uniform sampler2D depth_map2;
 
+uniform sampler2D sand;
+
 // Scaling for the aggressiveness of wave distortions
 uniform float height_scale : hint_range(0.0, 1.0) = 0.03;
 
@@ -106,6 +108,19 @@ vec2 ParallaxMapping(vec2 _uv, vec3 View_Direction)
 	return finalUV;
 }
 
+vec3 displace(sampler2D _normal, vec2 _uv)
+{
+vec3 duv = vec3(4.0 / 512.0, 4.0 / 512.0, 0);
+float v1 = texture(_normal, _uv - duv.xz).y;
+float v2 = texture(_normal, _uv + duv.xz).y;
+float v3 = texture(_normal, _uv - duv.zy).y;
+float v4 = texture(_normal, _uv + duv.zy).y;
+
+vec3 normal = normalize(vec3(v1 - v2, v3 - v4, 0.3));
+
+return normal;
+}
+
 void fragment()
 {	
 	/// DEPTH MATH
@@ -133,6 +148,8 @@ void fragment()
 	// ADJUSTED UV CALCULATIONS
 	vec2 AdjustedUV = ParallaxMapping(UV, ViewDirection);
 	vec2 AdjustedUV2 = AdjustedUV - UV + UV2;
+	
+	// Displace Normals
 
 	// OUTPUTS
 	vec3 AdjustedNormal1 = texture(normal_map, AdjustedUV).rgb;
@@ -144,6 +161,7 @@ void fragment()
 	// FINAL OUTPUTS
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
-	NORMAL_MAP = FinalNormal;
+	//NORMAL_MAP = FinalNormal;
+	NORMAL = displace(sand, UV);
 	ALBEDO = clamp(surface_color, vec3(0.0), vec3(1.0));
 }
