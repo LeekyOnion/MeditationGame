@@ -29,7 +29,7 @@ varying vec3 tangent_frag_pos;
 varying vec3 world_position;
 varying vec3 test;
 
-// UV manipulation 
+// UV manipulation
 uniform float uv_x_mod : hint_range(-1.0, 1.0, 0.05) = 0.0;
 uniform float uv_y_mod : hint_range(-1.0, 1.0, 0.05) = 0.0;
 uniform float uv2_x_mod : hint_range(-1.0, 1.0, 0.05) = 0.0;
@@ -122,7 +122,7 @@ return normal;
 }
 
 void fragment()
-{	
+{
 	/// DEPTH MATH
 	// Code to make the water function as water or light blocking - depth variables
 	float depth_texture = texture(DEPTH_TEXTURE, SCREEN_UV).r * 2.0 -1.0;
@@ -133,7 +133,7 @@ void fragment()
 
 	// Color for the depth
 	vec3 screen_color = textureLod(SCREEN_TEXTURE, SCREEN_UV, depth_blend_power * 2.5).rgb;
-	
+
 	// Calculations for the Fresnel Effect
 	float fresnel = fresnel(5.0, NORMAL, VIEW);
 	vec3 surface_color = mix(albedo, albedo2, fresnel);
@@ -148,7 +148,7 @@ void fragment()
 	// ADJUSTED UV CALCULATIONS
 	vec2 AdjustedUV = ParallaxMapping(UV, ViewDirection);
 	vec2 AdjustedUV2 = AdjustedUV - UV + UV2;
-	
+
 	// Displace Normals
 
 	// OUTPUTS
@@ -161,7 +161,8 @@ void fragment()
 	// FINAL OUTPUTS
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
-	//NORMAL_MAP = FinalNormal;
-	NORMAL = displace(sand, UV);
+	NORMAL_MAP = FinalNormal + displace(sand, UV);
+	//NORMAL_MAP = mix(FinalNormal, displace(sand, UV), 0.5);
+	//NORMAL = displace(sand, UV) + FinalNormal;
 	ALBEDO = clamp(surface_color, vec3(0.0), vec3(1.0));
 }
