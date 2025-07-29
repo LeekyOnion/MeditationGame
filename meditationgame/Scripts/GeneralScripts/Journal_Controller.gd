@@ -6,6 +6,12 @@ signal close_journal
 signal save_journal
 #endregion SIGNALS
 
+#region SHOWJOURNAL
+func show_journal():
+	print("Journal: show_journal() called")
+	self.visible = true
+#endregion SHOWJOURNAL
+
 #region VARIABLES
 # EXPORTS
 # @export var text_edit     : TextEdit

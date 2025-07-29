@@ -8,7 +8,7 @@ func _open_journal() -> void:   # Signal comes from Journal Button
 	main.hud.visible     = false
 
 func _open_inventory() -> void: # Signal comes from Inventory Button
-	main.Inventory_hud.visible = true
+	main.inventory_hud.visible = true
 	main.hud.visible           = false
 
 # SIGNAL LISTENERS
