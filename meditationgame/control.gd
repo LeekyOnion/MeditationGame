@@ -1,8 +1,8 @@
 extends Control
 
 # Circle animation properties
-var max_radius := 100.0
-var min_radius := 50.0
+var max_radius := 200.0
+var min_radius := 100.0
 var speed := 2.0
 var growing := true
 var success_tolerance := 5.0
