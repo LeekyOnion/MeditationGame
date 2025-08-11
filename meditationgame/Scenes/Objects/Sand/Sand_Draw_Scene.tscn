@@ -1,8 +1,7 @@
-[gd_scene load_steps=23 format=3 uid="uid://chomftf8x1ac8"]
+[gd_scene load_steps=19 format=3 uid="uid://chomftf8x1ac8"]
 
 [ext_resource type="Script" path="res://Scripts/GeneralScripts/sand_startup.gd" id="1_a32la"]
 [ext_resource type="Shader" path="res://Shaders/Sand/Displacement/sand_displace_shader.gdshader" id="2_depuu"]
-[ext_resource type="Shader" uid="uid://bmrmm1cw8lbds" path="res://Shaders/Sand/sand_draw_vs.tres" id="2_ojnlb"]
 [ext_resource type="Shader" path="res://Shaders/Sand/Main Shader/sand_material.gdshader" id="2_u2kk3"]
 [ext_resource type="Texture2D" uid="uid://dn8j4j21hbeu5" path="res://Shaders/Sand/sand_noise_2.tres" id="3_cqeik"]
 [ext_resource type="Shader" uid="uid://ciud72r31qni6" path="res://Shaders/Sand/Buffer/sand_buffer_vs.tres" id="3_vrocn"]
@@ -23,7 +22,7 @@ as_normal_map = true
 color_ramp = SubResource("Gradient_4br05")
 noise = SubResource("FastNoiseLite_atj5u")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_c00dx"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_0mry5"]
 viewport_path = NodePath("Sand")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_csa77"]
@@ -45,27 +44,10 @@ shader_parameter/normal_map = SubResource("NoiseTexture2D_11l50")
 shader_parameter/depth_map = SubResource("NoiseTexture2D_1wuf0")
 shader_parameter/normal_map2 = ExtResource("3_cqeik")
 shader_parameter/depth_map2 = ExtResource("3_cqeik")
-shader_parameter/sand = SubResource("ViewportTexture_c00dx")
+shader_parameter/sand = SubResource("ViewportTexture_0mry5")
 
 [sub_resource type="QuadMesh" id="QuadMesh_q08j4"]
 material = SubResource("ShaderMaterial_csa77")
-size = Vector2(10, 10)
-orientation = 1
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_b28lw"]
-viewport_path = NodePath("Sand")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_lwolu"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("2_ojnlb")
-shader_parameter/refraction_str = 0.1
-shader_parameter/ColorParameter = Color(0, 0, 1, 0.835294)
-shader_parameter/ColorParameter2 = Color(0, 1, 1, 0.568627)
-shader_parameter/sand = SubResource("ViewportTexture_b28lw")
-
-[sub_resource type="QuadMesh" id="QuadMesh_57px8"]
-material = SubResource("ShaderMaterial_lwolu")
 size = Vector2(10, 10)
 orientation = 1
 
@@ -86,8 +68,8 @@ viewport_path = NodePath("Buffer")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_586dn"]
 resource_local_to_scene = true
 shader = ExtResource("2_depuu")
-shader_parameter/phase = 0.2
-shader_parameter/attenuation = 0.995
+shader_parameter/phase = -0.01
+shader_parameter/attenuation = 1.0
 shader_parameter/deltaUV = 3.0
 shader_parameter/sim_tex = SubResource("ViewportTexture_527gg")
 shader_parameter/col_tex = SubResource("ViewportTexture_6ihmq")
@@ -105,11 +87,6 @@ collision_viewport = NodePath("Collision")
 [node name="Sand MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999996, 0.00200573, 0.00194153, -0.00200587, 0.999998, 7.34989e-05, -0.00194138, -7.73683e-05, 0.999998, 0, 0, 0)
 mesh = SubResource("QuadMesh_q08j4")
-
-[node name="Reference MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("QuadMesh_57px8")
-skeleton = NodePath("../Sand MeshInstance3D")
 
 [node name="Buffer" type="SubViewport" parent="."]
 render_target_clear_mode = 2

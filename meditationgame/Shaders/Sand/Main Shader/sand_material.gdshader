@@ -116,7 +116,7 @@ float v2 = texture(_normal, _uv + duv.xz).y;
 float v3 = texture(_normal, _uv - duv.zy).y;
 float v4 = texture(_normal, _uv + duv.zy).y;
 
-vec3 normal = normalize(vec3(v1 - v2, v3 - v4, 0.3));
+vec3 normal = normalize(vec3(v1 - v2, v3 - v4, 1.0));
 
 return normal;
 }
@@ -161,8 +161,8 @@ void fragment()
 	// FINAL OUTPUTS
 	METALLIC = metallic;
 	ROUGHNESS = roughness;
-	NORMAL_MAP = FinalNormal + displace(sand, UV);
-	//NORMAL_MAP = mix(FinalNormal, displace(sand, UV), 0.5);
+	NORMAL_MAP = FinalNormal - displace(sand, UV) * 0.5;
+	//NORMAL_MAP = mix(FinalNormal, displace(sand, UV), 0.50);
 	//NORMAL = displace(sand, UV) + FinalNormal;
 	ALBEDO = clamp(surface_color, vec3(0.0), vec3(1.0));
 }
