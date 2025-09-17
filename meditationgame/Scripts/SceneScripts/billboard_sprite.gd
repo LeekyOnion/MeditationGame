@@ -11,7 +11,7 @@ class_name BillboardSprite
 @onready var sprite : Sprite3D = $Sprite3D
 
 @export var _texture : Texture2D
-@export var grid_map : GridMap
+#@export var grid_map : GridMap
 
 var selected = false
 var mouse_offset = Vector3(0, 0, 0)
@@ -22,9 +22,9 @@ const RAY_LENGTH := 1000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if _texture != null and grid_map != null:
+	if _texture != null: #and grid_map != null:
 		sprite.texture = _texture
-		tile_size = grid_map.cell_size
+		#tile_size = grid_map.cell_size
 	scale = Vector3(8, 8, 8) #Change when needed, just thought it was a fine size for now
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

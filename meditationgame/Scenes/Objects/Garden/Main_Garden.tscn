@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_hy5ox"]
 [ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Objects/Building/Building.tscn" id="5_4ib0h"]
 [ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="6_2iyf1"]
-[ext_resource type="PackedScene" uid="uid://s4o5lmuutypd" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_ak88q"]
+[ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_ak88q"]
 [ext_resource type="PackedScene" uid="uid://jgobijaa7k2v" path="res://sm_singing_bowl_place_holder.tscn" id="9_1xgm2"]
-[ext_resource type="PackedScene" uid="uid://ccex7nrene0g8" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Rake_Place_Holder.fbx" id="9_s4wp3"]
+[ext_resource type="PackedScene" uid="uid://b44y8wxlddrf7" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Rake_Place_Holder.fbx" id="9_s4wp3"]
 [ext_resource type="PackedScene" uid="uid://d3i14y05den76" path="res://ArtAssets/Andrew Hirl/Meshes/sm_journal_place_holder.tscn" id="10_unqoc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]

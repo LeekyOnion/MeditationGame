@@ -7,8 +7,11 @@
 [ext_resource type="Shader" uid="uid://ciud72r31qni6" path="res://Shaders/Sand/Buffer/sand_buffer_vs.tres" id="3_vrocn"]
 
 [sub_resource type="Gradient" id="Gradient_4br05"]
+offsets = PackedFloat32Array(0, 0.634921)
+colors = PackedColorArray(0.377919, 0.377919, 0.377919, 1, 0.617455, 0.617455, 0.617455, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_atj5u"]
+noise_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1wuf0"]
 seamless = true

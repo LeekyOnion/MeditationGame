@@ -5,6 +5,7 @@ class_name Main_Menu_Controls
 # Paths to the buttons
 @export var new_game_button : Button 
 @export var quit_button     : Button
+
 #endregion VARIABLES
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -13,7 +14,7 @@ func _ready() -> void:
 
 func _on_new_game_button_pressed():
 	# Load the game scene and switch to it
-	var game_scene = load("res://Scenes/Main_Garden.tscn")  # Replace with your game scene path
+	var game_scene = load("res://Scenes/Objects/Garden/Main_Garden.tscn")  # Replace with your game scene path
 	get_tree().change_scene_to_packed(game_scene)
 
 func _on_quit_button_pressed():

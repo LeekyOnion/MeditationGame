@@ -1,27 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://db6wtewoqx6cq"]
+[gd_scene load_steps=3 format=3 uid="uid://db6wtewoqx6cq"]
 
 [ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="1_a56hd"]
 [ext_resource type="PackedScene" uid="uid://oag57mxyekq0" path="res://Scenes/Objects/Test Objects/ball_test.tscn" id="2_di71f"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vhhpp"]
-sky_top_color = Color(0.389834, 0.450014, 0.562916, 1)
-sky_horizon_color = Color(0.647458, 0.654754, 0.673979, 1)
-sky_energy_multiplier = 2.0
-ground_horizon_color = Color(0.647458, 0.654754, 0.673979, 1)
-
-[sub_resource type="Sky" id="Sky_ujkrq"]
-sky_material = SubResource("ProceduralSkyMaterial_vhhpp")
-
-[sub_resource type="Environment" id="Environment_68wy5"]
-background_mode = 2
-sky = SubResource("Sky_ujkrq")
-tonemap_mode = 2
-glow_enabled = true
-
 [node name="Test_Sand_Draw_Scene" type="Node3D"]
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_68wy5")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866024, -0.433016, 0.250001, 0.476864, -0.865634, 0.152567, 0.150345, 0.251342, 0.956151, 0, 0, 0)
