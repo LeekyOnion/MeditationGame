@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://md0g30xcmitx"]
+
+[ext_resource type="Script" path="res://Scenes/rake_active_controller.gd" id="1_5uq5u"]
+
+[node name="HUD_RakeActive" type="CanvasLayer"]
+script = ExtResource("1_5uq5u")
+
+[node name="Rake Active Container" type="PanelContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_right = 94.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="TextEdit" type="TextEdit" parent="Rake Active Container"]
+layout_mode = 2
+text = "Rake is Active"

@@ -1,14 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=20 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_x48w0"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="2_r4oro"]
 [ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="3_limt0"]
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_hy5ox"]
+[ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://Scenes/Rake_Active.tscn" id="4_mhl4m"]
 [ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Objects/Building/Building.tscn" id="5_4ib0h"]
 [ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="6_2iyf1"]
 [ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_ak88q"]
 [ext_resource type="PackedScene" uid="uid://jgobijaa7k2v" path="res://sm_singing_bowl_place_holder.tscn" id="9_1xgm2"]
-[ext_resource type="PackedScene" uid="uid://b44y8wxlddrf7" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Rake_Place_Holder.fbx" id="9_s4wp3"]
+[ext_resource type="PackedScene" uid="uid://d0wnvirlcryub" path="res://Scenes/Objects/Rake/Rake.tscn" id="10_8fjik"]
 [ext_resource type="PackedScene" uid="uid://d3i14y05den76" path="res://ArtAssets/Andrew Hirl/Meshes/sm_journal_place_holder.tscn" id="10_unqoc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
@@ -84,6 +85,10 @@ main = NodePath("..")
 [node name="HUD_Inventory" parent="." instance=ExtResource("3_limt0")]
 visible = false
 
+[node name="HUD_RakeActive" parent="." node_paths=PackedStringArray("RakeObject") instance=ExtResource("4_mhl4m")]
+visible = false
+RakeObject = NodePath("../Rake")
+
 [node name="Journal" parent="." instance=ExtResource("4_hy5ox")]
 visible = false
 
@@ -105,13 +110,13 @@ skeleton = NodePath("")
 [node name="SM_PrayerBeads_Place_Holder" parent="." instance=ExtResource("8_ak88q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.403422, 0.0565856, -0.682537)
 
-[node name="SM_Rake_Place_Holder" parent="." instance=ExtResource("9_s4wp3")]
-transform = Transform3D(0.827581, 0, -0.561347, 0, 1, 0, 0.561347, 0, 0.827581, -0.227161, 0.0519684, -0.710122)
-
 [node name="SM_Bowl_Place_Holder" parent="." instance=ExtResource("9_1xgm2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0027, 0.0646538, -0.73543)
 
 [node name="SM_Journal_Place_Holder" parent="." instance=ExtResource("10_unqoc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15275, 0.0877199, -0.709209)
+
+[node name="Rake" parent="." instance=ExtResource("10_8fjik")]
+transform = Transform3D(0.00392385, 0, -0.00919801, 0, 0.01, 0, 0.00919801, 0, 0.00392385, -0.301748, 0.0474999, -0.675971)
 
 [connection signal="close_journal" from="Journal" to="HUD_Game_Select" method="_on_journal_close"]
