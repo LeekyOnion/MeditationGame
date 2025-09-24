@@ -38,3 +38,4 @@ func _unhandled_input(event):
 				print("Clicked something but it's not journal")
 		else:
 			print("No object hit")
+			

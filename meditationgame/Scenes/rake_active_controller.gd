@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name RakeActive
 
 @export var RakeObject : RakeController
 
