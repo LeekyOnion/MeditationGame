@@ -1,39 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://sr4mkvaatyl2"]
+[gd_scene load_steps=6 format=3 uid="uid://sr4mkvaatyl2"]
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/inventory_hud.gd" id="1_qg440"]
-[ext_resource type="PackedScene" uid="uid://cdenj6yid5yw" path="res://Scenes/ChildScenes/BillboardSprite.tscn" id="2_iqn5b"]
 [ext_resource type="Texture2D" uid="uid://nmvax4h8e8bf" path="res://icon.svg" id="2_kpsb5"]
+[ext_resource type="PackedScene" uid="uid://dmyixwun1utuy" path="res://Scenes/Objects/Garden/Main_Garden.tscn" id="2_kxqb4"]
+[ext_resource type="Texture2D" uid="uid://mmr0t0daush8" path="res://Scenes/Objects/Garden/test.png" id="3_8iqug"]
+[ext_resource type="PackedScene" uid="uid://fs1122fpe7oq" path="res://ItemButton.tscn" id="4_b2uav"]
 
 [node name="InventoryHUD" type="CanvasLayer"]
 script = ExtResource("1_qg440")
-billboard_sprite_scene = ExtResource("2_iqn5b")
+billboard_sprite_scene = ExtResource("2_kxqb4")
+item_textures = Array[Texture2D]([ExtResource("3_8iqug")])
+button_scene = ExtResource("4_b2uav")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 400.0
-offset_bottom = 648.0
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 5
 
-[node name="SpriteButton" type="Button" parent="Panel"]
+[node name="SpriteButton" type="Button" parent="GridContainer"]
 unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.0
-offset_top = -68.0
-offset_right = 68.0
-offset_bottom = 68.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
 tooltip_text = "Godot Logo"
 icon = ExtResource("2_kpsb5")
 
-[node name="CloseButton" type="Button" parent="Panel"]
-layout_mode = 0
-offset_right = 50.0
-offset_bottom = 40.0
+[node name="CloseButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -136.0
+offset_right = 39.0
+offset_bottom = -72.0
+grow_horizontal = 2
+grow_vertical = 0
 text = "Close"
+icon_alignment = 1
+vertical_icon_alignment = 2
 
-[connection signal="pressed" from="Panel/SpriteButton" to="." method="_select_item"]
-[connection signal="pressed" from="Panel/CloseButton" to="." method="_close_inventory"]
+[connection signal="pressed" from="GridContainer/SpriteButton" to="." method="_select_item"]
+[connection signal="pressed" from="CloseButton" to="." method="_close_inventory"]
