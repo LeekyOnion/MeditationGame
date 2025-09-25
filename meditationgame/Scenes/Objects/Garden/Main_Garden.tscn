@@ -1,33 +1,18 @@
-<<<<<<< Updated upstream
 [gd_scene load_steps=22 format=3 uid="uid://dmyixwun1utuy"]
-=======
-[gd_scene load_steps=28 format=3 uid="uid://dmyixwun1utuy"]
->>>>>>> Stashed changes
 
 [ext_resource type="Script" path="res://Scripts/SceneScripts/main_garden.gd" id="1_x48w0"]
 [ext_resource type="Script" path="res://Scenes/Objects/Garden/draw_controller.gd" id="2_b4qnb"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/ChildScenes/HUD.tscn" id="2_r4oro"]
 [ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/ChildScenes/InventoryHUD.tscn" id="3_limt0"]
-[ext_resource type="Texture2D" uid="uid://dbcnk676lvuvd" path="res://test.png" id="4_g2vns"]
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Scenes/ChildScenes/Journal.tscn" id="4_hy5ox"]
 [ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://Scenes/Rake_Active.tscn" id="4_mhl4m"]
 [ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Scenes/Objects/Building/Building.tscn" id="5_4ib0h"]
-[ext_resource type="Texture2D" uid="uid://dindsrehg7t7f" path="res://ArtAssets/Andrew Hirl/2D Sprites/Pampas Grass.png" id="5_jbuc1"]
 [ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Scenes/Objects/Sand/Sand_Draw_Scene.tscn" id="6_2iyf1"]
-[ext_resource type="Texture2D" uid="uid://g82o4y8hqn85" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock1.png" id="6_347r4"]
-[ext_resource type="Texture2D" uid="uid://c8gbj31cc6qu" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock2.png" id="7_tb2du"]
 [ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_ak88q"]
-[ext_resource type="Texture2D" uid="uid://cidrkovhfpnqu" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock3.png" id="8_e0k44"]
 [ext_resource type="PackedScene" uid="uid://jgobijaa7k2v" path="res://sm_singing_bowl_place_holder.tscn" id="9_1xgm2"]
-[ext_resource type="Texture2D" uid="uid://nd27vqv4xl8r" path="res://ArtAssets/Andrew Hirl/2D Sprites/RockCluster1.png" id="9_k52wm"]
 [ext_resource type="PackedScene" uid="uid://d0wnvirlcryub" path="res://Scenes/Objects/Rake/Rake.tscn" id="10_8fjik"]
-[ext_resource type="Texture2D" uid="uid://din7urqbabnpl" path="res://ArtAssets/Andrew Hirl/2D Sprites/RockCluster2.png" id="10_834tb"]
 [ext_resource type="PackedScene" uid="uid://d3i14y05den76" path="res://ArtAssets/Andrew Hirl/Meshes/sm_journal_place_holder.tscn" id="10_unqoc"]
-<<<<<<< Updated upstream
 [ext_resource type="PackedScene" uid="uid://o1yf10ofuu57" path="res://Draw.tscn" id="13_qdi1o"]
-=======
-[ext_resource type="Texture2D" uid="uid://3ft0040vg2f1" path="res://ArtAssets/Andrew Hirl/2D Sprites/RockCluster3.png" id="11_smmdj"]
->>>>>>> Stashed changes
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
 
@@ -113,25 +98,6 @@ directional_shadow_mode = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_e0nwy")
 
-<<<<<<< Updated upstream
-=======
-[node name="Game Camera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0, 1.5, 1)
-cull_mask = 524287
-fov = 60.0
-
-[node name="HUD_Game_Select" parent="." node_paths=PackedStringArray("main") instance=ExtResource("2_r4oro")]
-main = NodePath("..")
-
-[node name="HUD_Inventory" parent="." instance=ExtResource("3_limt0")]
-visible = false
-item_textures = Array[Texture2D]([ExtResource("4_g2vns"), ExtResource("5_jbuc1"), ExtResource("6_347r4"), ExtResource("7_tb2du"), ExtResource("8_e0k44"), ExtResource("9_k52wm"), ExtResource("10_834tb"), ExtResource("11_smmdj"), null, null, null])
-
-[node name="HUD_RakeActive" parent="." node_paths=PackedStringArray("RakeObject") instance=ExtResource("4_mhl4m")]
-visible = false
-RakeObject = NodePath("../Rake")
-
->>>>>>> Stashed changes
 [node name="Journal" parent="." instance=ExtResource("4_hy5ox")]
 visible = false
 
