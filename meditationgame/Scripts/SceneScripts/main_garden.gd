@@ -8,10 +8,12 @@ class_name Main_Garden
 
 func _ready() -> void:
 	pass
-
+	if inventory_hud:
+		inventory_hud.close_inventory.connect(_on_inventory_closed)
 @onready var camera = $"Game Camera"
 @onready var openJournal = $MainGarden/SM_SingingBowl_Place_Holder
 @onready var breathing_scene = preload("res://BreathingOverlay.tscn")
+
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -39,3 +41,9 @@ func _unhandled_input(event):
 		else:
 			print("No object hit")
 			
+func _on_inventory_closed() -> void:
+	inventory_hud.visible = false
+	# Re-show the normal HUD that contains the journal & inventory controls
+	hud.visible = true
+	
+	print("Main_Garden: Inventory closed – HUD & Journal controls visible")

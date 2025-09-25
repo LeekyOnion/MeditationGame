@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bicobtquu174i"]
+
+[node name="TextureButton" type="TextureButton"]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.1, 0.1)
+stretch_mode = 5
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 2
+stretch_mode = 5
