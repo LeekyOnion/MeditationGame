@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://jgobijaa7k2v"]
 
-[ext_resource type="PackedScene" uid="uid://cm4x8xm0oqr4d" path="res://ArtAssets/Andrew Hirl/Meshes/SM_SingingBowl_Place_Holder.fbx" id="1_h8lug"]
+[ext_resource type="PackedScene" uid="uid://du2cwhiwahoi3" path="res://ArtAssets/Andrew Hirl/Meshes/SM_SingingBowl_Place_Holder.fbx" id="1_h8lug"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_b3xne"]
 height = 0.140739
