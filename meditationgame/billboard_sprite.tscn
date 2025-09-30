@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dswl4m0eggc3b"]
+
+[node name="BillboardSprite" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+billboard = 1
