@@ -108,6 +108,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
 [node name="Sand Scene" parent="Ground" instance=ExtResource("6_2iyf1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00274009, 0.00933009, -0.00386429)
 
 [node name="Grass Plane" type="MeshInstance3D" parent="Ground"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, 0)

@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://bicobtquu174i"]
+[gd_scene load_steps=2 format=3 uid="uid://bicobtquu174i"]
+
+[ext_resource type="Texture2D" uid="uid://dindsrehg7t7f" path="res://ArtAssets/Andrew Hirl/2D Sprites/Pampas Grass.png" id="1_1klhe"]
 
 [node name="TextureButton" type="TextureButton"]
 custom_minimum_size = Vector2(128, 128)
@@ -11,5 +13,6 @@ stretch_mode = 5
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+texture = ExtResource("1_1klhe")
 expand_mode = 2
 stretch_mode = 5
