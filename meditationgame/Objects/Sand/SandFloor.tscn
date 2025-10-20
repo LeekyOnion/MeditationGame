@@ -1,10 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://chomftf8x1ac8"]
+[gd_scene load_steps=20 format=3 uid="uid://chomftf8x1ac8"]
 
 [ext_resource type="Script" path="res://Objects/Sand/sand_startup.gd" id="1_a32la"]
 [ext_resource type="Shader" path="res://Objects/Sand/Shaders/Sand/Displacement/sand_displace_shader.gdshader" id="2_depuu"]
 [ext_resource type="Shader" path="res://Objects/Sand/Shaders/Sand/Main Shader/sand_material.gdshader" id="2_u2kk3"]
 [ext_resource type="Texture2D" uid="uid://dn8j4j21hbeu5" path="res://Objects/Sand/Shaders/Sand/sand_noise_2.tres" id="3_cqeik"]
 [ext_resource type="Shader" uid="uid://ciud72r31qni6" path="res://Objects/Sand/Shaders/Sand/Buffer/sand_buffer_vs.tres" id="3_vrocn"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g5b0r"]
+size = Vector3(10, 0, 10)
 
 [sub_resource type="Gradient" id="Gradient_4br05"]
 offsets = PackedFloat32Array(0, 0.634921)
@@ -86,6 +89,11 @@ sand = NodePath("Sand MeshInstance3D")
 sand_colorRect = NodePath("Sand/ColorRect")
 sand_viewport = NodePath("Sand")
 collision_viewport = NodePath("Collision")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_g5b0r")
 
 [node name="Sand MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.999996, 0.00200573, 0.00194153, -0.00200587, 0.999998, 7.34989e-05, -0.00194138, -7.73683e-05, 0.999998, 0, 0, 0)

@@ -90,4 +90,4 @@ func _input(event):
 
 func _on_button_pressed() -> void:
 	queue_free()
-	get_tree().change_scene_to_file("res://Scenes/Objects/Garden/Main_Garden.tscn")
+	#get_tree().change_scene_to_file("res://Scenes/Objects/Garden/Main_Garden.tscn")

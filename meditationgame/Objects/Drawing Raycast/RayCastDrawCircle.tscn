@@ -19,6 +19,6 @@ height = 0.5
 mesh = SubResource("SphereMesh_6pfg0")
 
 [node name="BallShader" type="MeshInstance3D" parent="."]
-layers = 0
+layers = 524288
 mesh = SubResource("SphereMesh_5af1m")
 skeleton = NodePath("../BallMesh")

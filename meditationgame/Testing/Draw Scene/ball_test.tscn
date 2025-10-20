@@ -58,7 +58,7 @@ animplayer = NodePath("AnimationPlayer")
 mesh = SubResource("SphereMesh_4rtdr")
 
 [node name="Ball Shader" type="MeshInstance3D" parent="."]
-layers = 0
+layers = 524288
 mesh = SubResource("SphereMesh_4qdi2")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
