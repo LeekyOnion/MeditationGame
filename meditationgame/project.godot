@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="MeditationGame"
-run/main_scene="res://Scenes/Objects/Menus/Main Menu/Main_Menu.tscn"
+run/main_scene="res://Objects/Main Menu/Main_Menu.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-Globals="*res://Scripts/GlobalScripts/Globals.gd"
+Globals="*res://Global Scripts/Global Scripts/Globals.gd"
 
 [importer_defaults]
 
