@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdenj6yid5yw"]
 
-[ext_resource type="Script" path="res://Global Scripts/DEPRECATED_Scripts/billboard_sprite.gd" id="1_87mxc"]
+[ext_resource type="Script" path="res://Scenes/HUD/billboard_sprite.gd" id="1_87mxc"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_raoif"]
 

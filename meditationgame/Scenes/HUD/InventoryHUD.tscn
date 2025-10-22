@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scenes/HUD/inventory_hud.gd" id="1_qg440"]
 [ext_resource type="PackedScene" uid="uid://cdenj6yid5yw" path="res://Scenes/HUD/BillboardSprite.tscn" id="2_iqn5b"]
-[ext_resource type="PackedScene" uid="uid://bicobtquu174i" path="res://Objects/Main Menu/ItemButton.tscn" id="2_pe5nd"]
+[ext_resource type="PackedScene" uid="uid://bicobtquu174i" path="res://Objects/Inventory/ItemButton.tscn" id="2_pe5nd"]
 [ext_resource type="Texture2D" uid="uid://dindsrehg7t7f" path="res://ArtAssets/Andrew Hirl/2D Sprites/Pampas Grass.png" id="3_oska1"]
 [ext_resource type="Texture2D" uid="uid://g82o4y8hqn85" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock1.png" id="4_wkkgc"]
 [ext_resource type="Texture2D" uid="uid://c8gbj31cc6qu" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock2.png" id="5_hbn3k"]

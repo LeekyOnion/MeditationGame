@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1e6uw4is8cvi"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_6pfg0"]
-radius = 0.25
-height = 0.5
+radius = 0.063
+height = 0.125
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8p6n4"]
 shading_mode = 0
@@ -10,10 +10,10 @@ albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_5af1m"]
 material = SubResource("StandardMaterial3D_8p6n4")
-radius = 0.25
-height = 0.5
+radius = 0.063
+height = 0.125
 
-[node name="RayCastDrawCircle" type="Node3D"]
+[node name="ShaderCircle" type="Node3D"]
 
 [node name="BallMesh" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_6pfg0")
@@ -21,4 +21,3 @@ mesh = SubResource("SphereMesh_6pfg0")
 [node name="BallShader" type="MeshInstance3D" parent="."]
 layers = 524288
 mesh = SubResource("SphereMesh_5af1m")
-skeleton = NodePath("../BallMesh")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://oag57mxyekq0"]
 
-[ext_resource type="Script" path="res://Testing/Draw Scene/ball_tester.gd" id="1_1jbrf"]
+[ext_resource type="Script" path="res://Testing/Draw Scene/test_ball.gd" id="1_1jbrf"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_4rtdr"]
 
@@ -49,7 +49,7 @@ _data = {
 "RESET": SubResource("Animation_wki8f")
 }
 
-[node name="Ball Test" type="Node3D" node_paths=PackedStringArray("animplayer")]
+[node name="BallTest" type="Node3D" node_paths=PackedStringArray("animplayer")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_1jbrf")
 animplayer = NodePath("AnimationPlayer")

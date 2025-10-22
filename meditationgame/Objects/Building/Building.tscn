@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://c0ss3g41a06hi"]
 
-[ext_resource type="Material" uid="uid://8sdwtb0blj6h" path="res://Objects/Building/Bamboo/Bamboo.tres" id="1_8qohq"]
+[ext_resource type="Material" uid="uid://8sdwtb0blj6h" path="res://Objects/Building/Bamboo/bld_bamboo.tres" id="1_8qohq"]
 [ext_resource type="PackedScene" uid="uid://prfahmq4o3ep" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Garden_Wall_Cap.fbx" id="2_nkrgf"]
 [ext_resource type="PackedScene" uid="uid://dawukbqp2g08a" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Garden_Wall_Corner.fbx" id="3_sbov3"]
 [ext_resource type="PackedScene" uid="uid://dpks8kkpl2ypk" path="res://ArtAssets/Andrew Hirl/Meshes/SM_Garden_wall_Straight.fbx" id="4_h33p5"]

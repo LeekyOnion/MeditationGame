@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cfcfhujojb5bh"]
 
-[ext_resource type="Script" path="res://Global Scripts/Main Game Navigation/MainControl.gd" id="1_kiq04"]
+[ext_resource type="Script" path="res://Scenes/Main Menu/MainControl.gd" id="1_kiq04"]
 
 [node name="Main Menu" type="Control" node_paths=PackedStringArray("new_game_button", "quit_button")]
 layout_mode = 3
