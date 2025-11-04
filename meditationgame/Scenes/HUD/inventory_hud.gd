@@ -23,7 +23,7 @@ signal close_inventory  # emitted when Close button is pressed
 # ---------------------------
 # Dragging state
 # ---------------------------
-var dragging_item: Node3D = null
+var dragging_item: Sprite3D = null
 var dragging_texture: Texture2D = null
 
 # ---------------------------
@@ -85,7 +85,7 @@ func _on_item_button_pressed(button: TextureButton) -> void:
 		push_error("InventoryHUD: billboard_sprite_scene not assigned!")
 		return
 
-	dragging_item = billboard_sprite_scene.instantiate() as Node3D
+	dragging_item = billboard_sprite_scene.instantiate() as Sprite3D
 	if dragging_item == null:
 		push_error("InventoryHUD: Could not instantiate billboard_sprite_scene")
 		return
@@ -100,14 +100,14 @@ func _on_item_button_pressed(button: TextureButton) -> void:
 # ---------------------------
 # Apply texture recursively to Sprite3D
 # ---------------------------
-func _apply_texture_to_sprite(inst: Node, texture: Texture2D) -> void:
-	if inst is Sprite3D:
-		inst.texture = texture
-		inst.scale = Vector3(0.001, 0.001, 0.001)  # adjust size
-		return
+func _apply_texture_to_sprite(inst: Sprite3D, texture: Texture2D) -> void:
+	
+	inst.set_texture(texture)
+	inst.pixel_size = 0.0001 # adjust size
 
-	for child in inst.get_children():
-		_apply_texture_to_sprite(child, texture)
+
+	#for child in inst.get_children():
+		#_apply_texture_to_sprite(child, texture)
 
 # ---------------------------
 # Update dragging position each frame
