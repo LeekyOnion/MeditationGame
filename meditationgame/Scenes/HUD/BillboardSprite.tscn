@@ -4,15 +4,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_raoif"]
 
-[node name="BillboardSprite" type="Node3D"]
+[node name="Sprite3D" type="Sprite3D"]
+billboard = 1
 script = ExtResource("1_87mxc")
 
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
+[node name="Area3D" type="StaticBody3D" parent="."]
 
-[node name="Area3D" type="Area3D" parent="Sprite3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Sprite3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("BoxShape3D_raoif")
-
-[connection signal="input_event" from="Sprite3D/Area3D" to="." method="_on_area_3d_input_event"]
