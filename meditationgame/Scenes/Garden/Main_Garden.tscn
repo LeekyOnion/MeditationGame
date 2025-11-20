@@ -1,8 +1,9 @@
-[gd_scene load_steps=21 format=3 uid="uid://dmyixwun1utuy"]
+[gd_scene load_steps=22 format=3 uid="uid://dmyixwun1utuy"]
 
 [ext_resource type="Script" path="res://Scenes/Garden/main_garden.gd" id="1_fsuk5"]
 [ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/HUD/HUD.tscn" id="2_6fa6n"]
 [ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/HUD/InventoryHUD.tscn" id="3_54uab"]
+[ext_resource type="PackedScene" uid="uid://cdenj6yid5yw" path="res://Scenes/HUD/BillboardSprite.tscn" id="4_bs1kb"]
 [ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://Objects/Rake/Rake_Active.tscn" id="4_ndesl"]
 [ext_resource type="Texture2D" uid="uid://dindsrehg7t7f" path="res://ArtAssets/Andrew Hirl/2D Sprites/Pampas Grass.png" id="4_ummu4"]
 [ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Objects/Journal/JournalMenu.tscn" id="5_kl2a8"]
@@ -87,6 +88,7 @@ main = NodePath("../..")
 
 [node name="HUD_Inventory" parent="UI_UX" instance=ExtResource("3_54uab")]
 visible = false
+billboard_sprite = ExtResource("4_bs1kb")
 item_textures = Array[Texture2D]([ExtResource("4_ummu4"), null, null, null])
 
 [node name="HUD_RakeActive" parent="UI_UX" node_paths=PackedStringArray("RakeObject") instance=ExtResource("4_ndesl")]
