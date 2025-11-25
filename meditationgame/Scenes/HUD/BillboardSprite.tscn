@@ -5,6 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_raoif"]
 
 [node name="Sprite3D" type="Sprite3D"]
+offset = Vector2(0, 9000)
 billboard = 1
 script = ExtResource("1_87mxc")
 
