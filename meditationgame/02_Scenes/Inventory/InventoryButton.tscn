@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://bj7k5rms4bygv"]
+
+[ext_resource type="Script" uid="uid://b2p35x7d2sw8t" path="res://02_Scenes/Inventory/inventory_button.gd" id="1_pftce"]
+
+[node name="InventoryButton" type="CanvasLayer"]
+script = ExtResource("1_pftce")
+
+[node name="Inventory Container" type="MarginContainer" parent="."]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 144.0
+offset_bottom = 48.0
+
+[node name="Inventory" type="Button" parent="Inventory Container"]
+layout_mode = 2
+text = "Open Inventory"
+
+[connection signal="pressed" from="Inventory Container/Inventory" to="." method="_open_inventory"]

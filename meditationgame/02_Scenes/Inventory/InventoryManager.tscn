@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnv3lq5hnqu3o"]
+
+[ext_resource type="Script" uid="uid://b86saus2silg8" path="res://02_Scenes/Inventory/inventory_manager.gd" id="1_3p60a"]
+[ext_resource type="PackedScene" uid="uid://js2pfob550s3" path="res://01_Entities/Placeable Sprites/Pampas Grass/pampas_grass.tscn" id="2_ejwkr"]
+[ext_resource type="Texture2D" uid="uid://dindsrehg7t7f" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/Pampas Grass.png" id="2_v4nif"]
+[ext_resource type="Texture2D" uid="uid://g82o4y8hqn85" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/Rock1.png" id="3_ifuw8"]
+[ext_resource type="PackedScene" uid="uid://c7y8mg4xm7xtj" path="res://01_Entities/Placeable Sprites/Flat Rock/flat_rock.tscn" id="3_itdgi"]
+[ext_resource type="Texture2D" uid="uid://din7urqbabnpl" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/RockCluster2.png" id="4_ejwkr"]
+[ext_resource type="PackedScene" uid="uid://cj6s5mxl2xdqp" path="res://01_Entities/Placeable Sprites/Tall Rock/tall_rock.tscn" id="4_itdgi"]
+[ext_resource type="PackedScene" uid="uid://ghtp6l2hagf1" path="res://01_Entities/Placeable Sprites/Rock Cluster/rock_cluster.tscn" id="4_vvwmq"]
+[ext_resource type="Texture2D" uid="uid://cidrkovhfpnqu" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/Rock3.png" id="5_yw6g4"]
+
+[node name="InventoryManager" type="CanvasLayer"]
+script = ExtResource("1_3p60a")
+item_scenes = Dictionary[int, PackedScene]({
+0: ExtResource("2_ejwkr"),
+1: ExtResource("3_itdgi"),
+2: ExtResource("4_vvwmq"),
+3: ExtResource("4_itdgi")
+})
+
+[node name="Inventory" type="ItemList" parent="."]
+unique_name_in_owner = true
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 92.0
+offset_bottom = 296.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_default_cursor_shape = 2
+allow_search = false
+auto_width = true
+auto_height = true
+item_count = 4
+same_column_width = true
+fixed_column_width = 256
+fixed_icon_size = Vector2i(64, 64)
+item_0/text = "Pampas Grass"
+item_0/icon = ExtResource("2_v4nif")
+item_1/text = "Flat Rock"
+item_1/icon = ExtResource("3_ifuw8")
+item_2/text = "Rock Cluster"
+item_2/icon = ExtResource("4_ejwkr")
+item_3/text = "Tall Rock"
+item_3/icon = ExtResource("5_yw6g4")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.5
+offset_top = -52.0
+offset_right = 64.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="close_button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Close Inventory"
+
+[connection signal="item_selected" from="Inventory" to="." method="_on_item_selected"]
+[connection signal="pressed" from="VBoxContainer/close_button" to="." method="_on_close_button_pressed"]

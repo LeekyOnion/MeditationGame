@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0wnvirlcryub"]
+
+[ext_resource type="Script" uid="uid://cw705l68j8lu" path="res://01_Entities/Rake/rake_controller.gd" id="1_hmrdq"]
+[ext_resource type="PackedScene" uid="uid://b44y8wxlddrf7" path="res://01_Entities/Rake/SM_Rake_Place_Holder.fbx" id="2_2riby"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_qxemx"]
+size = Vector3(0.185, 0.1, 0.5)
+
+[node name="Rake" type="Node3D"]
+script = ExtResource("1_hmrdq")
+
+[node name="SM_Rake_Place_Holder" parent="." instance=ExtResource("2_2riby")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0038130246, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.050311342, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_qxemx")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

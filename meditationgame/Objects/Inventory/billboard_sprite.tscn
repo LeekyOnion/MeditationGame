@@ -1,9 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dswl4m0eggc3b"]
-
-[ext_resource type="Texture2D" uid="uid://g82o4y8hqn85" path="res://ArtAssets/Andrew Hirl/2D Sprites/Rock1.png" id="1_pad40"]
-
-[node name="BillboardSprite" type="Node3D"]
-
-[node name="Sprite3D" type="Sprite3D" parent="."]
-billboard = 1
-texture = ExtResource("1_pad40")

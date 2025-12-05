@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dnxto081h71ap"]
-
-[ext_resource type="Texture2D" uid="uid://csh1wnx10gce6" path="res://ArtAssets/Journal/Journal_Spritesheet_animation.png" id="1_v7uvu"]
-
-[node name="JournalSpritesheetAnimation" type="Sprite2D"]
-texture = ExtResource("1_v7uvu")
-hframes = 6
-vframes = 2

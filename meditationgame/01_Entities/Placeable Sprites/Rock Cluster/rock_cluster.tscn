@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ghtp6l2hagf1"]
+
+[ext_resource type="Texture2D" uid="uid://din7urqbabnpl" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/RockCluster2.png" id="1_ser5j"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x5h4"]
+size = Vector3(1.28, 1.25, 1.27)
+
+[node name="RockCluster" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.582557, 0)
+billboard = 2
+shaded = true
+texture_filter = 2
+render_priority = 1
+texture = ExtResource("1_ser5j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.625, 0)
+shape = SubResource("BoxShape3D_0x5h4")

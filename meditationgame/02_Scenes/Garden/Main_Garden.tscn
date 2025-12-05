@@ -1,0 +1,158 @@
+[gd_scene load_steps=22 format=3 uid="uid://dmyixwun1utuy"]
+
+[ext_resource type="Script" uid="uid://dgnx4hjre8opx" path="res://04_Global Scripts/Global Scripts/game_manager.gd" id="1_wkf14"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://02_Scenes/Inventory/InventoryButton.tscn" id="2_6fa6n"]
+[ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://01_Entities/Rake/Rake_Active.tscn" id="4_ndesl"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://01_Entities/JournalMenu/JournalMenu.tscn" id="5_kl2a8"]
+[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://01_Entities/Building/Building.tscn" id="6_0r6bd"]
+[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://01_Entities/Sand/SandFloor.tscn" id="7_hc5wu"]
+[ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_712ms"]
+[ext_resource type="PackedScene" uid="uid://bqlp26fvdiqds" path="res://01_Entities/Journal/Journal.tscn" id="10_1f7qu"]
+[ext_resource type="PackedScene" uid="uid://d0wnvirlcryub" path="res://01_Entities/Rake/Rake.tscn" id="11_5psu1"]
+[ext_resource type="PackedScene" uid="uid://deis310phlej3" path="res://01_Entities/Singing Bowl/SingingBowl.tscn" id="11_q5lqd"]
+[ext_resource type="PackedScene" uid="uid://2v3eb66gg835" path="res://02_Scenes/RakeGame/rake_game.tscn" id="13_pjo5y"]
+[ext_resource type="PackedScene" uid="uid://bnv3lq5hnqu3o" path="res://02_Scenes/Inventory/InventoryManager.tscn" id="13_wkf14"]
+[ext_resource type="PackedScene" uid="uid://c2ewq56ry7fk" path="res://02_Scenes/Breathing/BreathingOverlay.tscn" id="14_wkf14"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
+
+[sub_resource type="Sky" id="Sky_ym75h"]
+sky_material = SubResource("ProceduralSkyMaterial_437dt")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_e0nwy"]
+background_mode = 2
+background_color = Color(0.497474, 0.497474, 0.497474, 1)
+sky = SubResource("Sky_ym75h")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xyb2d"]
+frequency = 0.5
+fractal_octaves = 8
+fractal_lacunarity = 3.335
+fractal_gain = 0.905
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 29.37
+domain_warp_frequency = 0.225
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1dyrb"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxh2q"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_xyb2d")
+as_normal_map = true
+bump_strength = 4.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c27r"]
+albedo_color = Color(0.313268, 0.356105, 0.240722, 1)
+albedo_texture = SubResource("NoiseTexture2D_1dyrb")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_pxh2q")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ikpg"]
+material = SubResource("StandardMaterial3D_8c27r")
+size = Vector2(25, 25)
+orientation = 1
+
+[node name="GameManager" type="Node3D"]
+script = ExtResource("1_wkf14")
+
+[node name="SandScene" parent="." instance=ExtResource("7_hc5wu")]
+unique_name_in_owner = true
+
+[node name="GameCamera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.97437006, 0.22495104, 0, -0.22495104, 0.97437006, 0, 1.213189, 6.777643)
+cull_mask = 524287
+far = 1000.0
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-1, 6.181726e-08, -6.181726e-08, 0, 0.7071068, 0.7071068, 8.74228e-08, 0.7071068, -0.7071068, 0, 5.3617887, -5.98632)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_e0nwy")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Building" parent="Environment" instance=ExtResource("6_0r6bd")]
+process_priority = 0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8.289793)
+
+[node name="Grass Plane" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, -2.08616e-07)
+sorting_offset = -10.0
+sorting_use_aabb_center = false
+mesh = SubResource("QuadMesh_5ikpg")
+skeleton = NodePath("")
+metadata/_edit_lock_ = true
+
+[node name="PlacedObjects" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="UI" type="Node" parent="."]
+
+[node name="ActiveNotification" parent="UI" instance=ExtResource("4_ndesl")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Interactables" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="SM_PrayerBeads_Place_Holder" parent="Interactables" instance=ExtResource("8_712ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57326615, 0.05658554, 5.6116304)
+
+[node name="Journal" parent="Interactables" groups=["Interactables"] instance=ExtResource("10_1f7qu")]
+unique_name_in_owner = true
+transform = Transform3D(-0.6310821, 0, -0.77571607, 0, 1, 0, 0.77571607, 0, -0.6310821, 1.4040761, 0.0589847, 5.6042533)
+
+[node name="Rake" parent="Interactables" groups=["Interactables"] instance=ExtResource("11_5psu1")]
+unique_name_in_owner = true
+transform = Transform3D(0.5948228, 0, 0.80385697, 0, 1, 0, -0.80385697, 0, 0.5948228, -0.22773212, 0.049688607, 5.641947)
+
+[node name="SingingBowl" parent="Interactables" groups=["Interactables"] instance=ExtResource("11_q5lqd")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.132221, 0.04949996, 5.61685)
+
+[node name="InventoryButton" parent="Interactables" groups=["Interactables"] instance=ExtResource("2_6fa6n")]
+unique_name_in_owner = true
+
+[node name="Activities" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="JournalGame" parent="Activities" groups=["Activities"] instance=ExtResource("5_kl2a8")]
+unique_name_in_owner = true
+visible = false
+
+[node name="RakeGame" parent="Activities" groups=["Activities"] instance=ExtResource("13_pjo5y")]
+unique_name_in_owner = true
+visible = false
+
+[node name="BreathingGame" parent="Activities" groups=["Activities"] instance=ExtResource("14_wkf14")]
+unique_name_in_owner = true
+visible = false
+
+[node name="InventoryManager" parent="Activities" groups=["Activities"] instance=ExtResource("13_wkf14")]
+unique_name_in_owner = true
+visible = false
+
+[connection signal="journal_active" from="Interactables/Journal" to="." method="_on_journal_journal_active"]
+[connection signal="rake_active" from="Interactables/Rake" to="." method="_on_rake_active"]
+[connection signal="rake_active" from="Interactables/Rake" to="Activities/RakeGame" method="_on_rake_active"]
+[connection signal="breathing_active" from="Interactables/SingingBowl" to="." method="_on_singing_bowl_breathing_active"]
+[connection signal="inventory_open" from="Interactables/InventoryButton" to="." method="_on_inventory_manager_open"]
+[connection signal="close_journal" from="Activities/JournalGame" to="." method="_on_journal_game_close_journal"]
+[connection signal="save_journal" from="Activities/JournalGame" to="." method="_on_journal_game_save_journal"]
+[connection signal="exit_rake_mode" from="Activities/RakeGame" to="." method="_on_rake_game_exit"]
+[connection signal="close_breathing" from="Activities/BreathingGame" to="." method="_on_breathing_game_close_breathing"]
+[connection signal="close_inventory" from="Activities/InventoryManager" to="." method="_on_inventory_manager_close_inventory"]

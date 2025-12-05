@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://o1yf10ofuu57"]
+
+[ext_resource type="Script" uid="uid://cx54ocgljoqbt" path="res://01_Entities/Drawing Raycast/draw._raycast.gd" id="1_hweg1"]
+
+[node name="Draw Raycast" type="RayCast3D"]
+debug_shape_custom_color = Color(1, 0, 0, 1)
+debug_shape_thickness = 4
+script = ExtResource("1_hweg1")

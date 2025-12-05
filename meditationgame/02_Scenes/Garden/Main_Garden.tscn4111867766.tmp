@@ -1,0 +1,153 @@
+[gd_scene load_steps=23 format=3 uid="uid://dmyixwun1utuy"]
+
+[ext_resource type="Script" uid="uid://dgnx4hjre8opx" path="res://04_Global Scripts/Global Scripts/game_manager.gd" id="1_wkf14"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://02_Scenes/HUD/HUD.tscn" id="2_6fa6n"]
+[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://02_Scenes/HUD/InventoryHUD.tscn" id="3_54uab"]
+[ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://01_Entities/Rake/Rake_Active.tscn" id="4_ndesl"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://01_Entities/Journal/JournalMenu.tscn" id="5_kl2a8"]
+[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://01_Entities/Building/Building.tscn" id="6_0r6bd"]
+[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://01_Entities/Sand/SandFloor.tscn" id="7_hc5wu"]
+[ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_712ms"]
+[ext_resource type="PackedScene" uid="uid://dpwspk6fl54fq" path="res://01_Entities/Placeable Sprites/pampas_grass.tscn" id="8_f23d5"]
+[ext_resource type="PackedScene" uid="uid://bqlp26fvdiqds" path="res://01_Entities/Journal/Journal.tscn" id="10_1f7qu"]
+[ext_resource type="PackedScene" uid="uid://d0wnvirlcryub" path="res://01_Entities/Rake/Rake.tscn" id="11_5psu1"]
+[ext_resource type="PackedScene" uid="uid://deis310phlej3" path="res://01_Entities/Singing Bowl/SingingBowl.tscn" id="11_q5lqd"]
+[ext_resource type="Script" uid="uid://bsmnend4d870p" path="res://03_General Scripts/state_machine.gd" id="13_0cqne"]
+[ext_resource type="Script" uid="uid://c667mdpivghq6" path="res://02_Scenes/Garden/default_state.gd" id="13_pjo5y"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
+
+[sub_resource type="Sky" id="Sky_ym75h"]
+sky_material = SubResource("ProceduralSkyMaterial_437dt")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_e0nwy"]
+background_mode = 2
+background_color = Color(0.497474, 0.497474, 0.497474, 1)
+sky = SubResource("Sky_ym75h")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xyb2d"]
+frequency = 0.5
+fractal_octaves = 8
+fractal_lacunarity = 3.335
+fractal_gain = 0.905
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 29.37
+domain_warp_frequency = 0.225
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1dyrb"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxh2q"]
+width = 1024
+height = 1024
+noise = SubResource("FastNoiseLite_xyb2d")
+as_normal_map = true
+bump_strength = 4.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c27r"]
+albedo_color = Color(0.313268, 0.356105, 0.240722, 1)
+albedo_texture = SubResource("NoiseTexture2D_1dyrb")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_pxh2q")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ikpg"]
+material = SubResource("StandardMaterial3D_8c27r")
+size = Vector2(25, 25)
+orientation = 1
+
+[node name="MainGarden" type="Node3D"]
+script = ExtResource("1_wkf14")
+
+[node name="Sand Scene" parent="." instance=ExtResource("7_hc5wu")]
+unique_name_in_owner = true
+
+[node name="Game Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0, 1.5, 7.09977)
+cull_mask = 524287
+fov = 60.0
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.47106, -5.98632)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_e0nwy")
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Building" parent="Environment" instance=ExtResource("6_0r6bd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Grass Plane" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, -2.08616e-07)
+sorting_offset = -10.0
+sorting_use_aabb_center = false
+mesh = SubResource("QuadMesh_5ikpg")
+skeleton = NodePath("")
+
+[node name="UI" type="Node" parent="."]
+
+[node name="GameModeSelector" parent="UI" instance=ExtResource("2_6fa6n")]
+unique_name_in_owner = true
+
+[node name="Inventory" parent="UI" instance=ExtResource("3_54uab")]
+unique_name_in_owner = true
+visible = false
+item_list = Array[PackedScene]([ExtResource("8_f23d5")])
+
+[node name="RakeActiveNotification" parent="UI" node_paths=PackedStringArray("RakeObject") instance=ExtResource("4_ndesl")]
+unique_name_in_owner = true
+visible = false
+RakeObject = NodePath("../../Interactables/RakeInteractable")
+
+[node name="Activities" type="Node" parent="."]
+
+[node name="JournalGame" parent="Activities" instance=ExtResource("5_kl2a8")]
+unique_name_in_owner = true
+visible = false
+
+[node name="Interactables" type="Node" parent="."]
+
+[node name="SM_PrayerBeads_Place_Holder" parent="Interactables" instance=ExtResource("8_712ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.403422, 0.0565856, 5.41723)
+
+[node name="JournalInteractable" parent="Interactables" node_paths=PackedStringArray("Journal") instance=ExtResource("10_1f7qu")]
+unique_name_in_owner = true
+transform = Transform3D(1.19249e-10, 0, -0.01, 0, 0.01, 0, 0.01, 0, 1.19249e-10, 1.07405, 0.0589847, 5.40567)
+Journal = NodePath("../../Activities/JournalGame")
+
+[node name="RakeInteractable" parent="Interactables" instance=ExtResource("11_5psu1")]
+unique_name_in_owner = true
+transform = Transform3D(0.00392385, 0, -0.00919801, 0, 0.01, 0, 0.00919801, 0, 0.00392385, -0.301748, 0.0474999, 5.42379)
+
+[node name="SingingBowlInteractable" parent="Interactables" instance=ExtResource("11_q5lqd")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03625, 0.0474999, 5.42214)
+
+[node name="GameStateManager" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("13_0cqne")
+initial_state = NodePath("Default")
+
+[node name="Default" type="Node" parent="GameStateManager"]
+script = ExtResource("13_pjo5y")
+
+[node name="Rake" type="Node" parent="GameStateManager"]
+
+[node name="Journal" type="Node" parent="GameStateManager"]
+
+[node name="Breathing" type="Node" parent="GameStateManager"]
+
+[node name="Placing" type="Node" parent="GameStateManager"]
+
+[connection signal="close_journal" from="Activities/JournalGame" to="UI/GameModeSelector" method="_on_journal_close"]

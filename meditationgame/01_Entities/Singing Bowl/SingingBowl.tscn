@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://deis310phlej3"]
+
+[ext_resource type="Script" uid="uid://jawc6quaggyi" path="res://01_Entities/Singing Bowl/singing_bowl.gd" id="1_egm36"]
+[ext_resource type="PackedScene" uid="uid://cm4x8xm0oqr4d" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_SingingBowl_Place_Holder.fbx" id="2_yuufu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_by7dp"]
+size = Vector3(0.21, 0.125, 0.235)
+
+[node name="SingingBowl" type="Node3D"]
+script = ExtResource("1_egm36")
+
+[node name="SM_SingingBowl_Place_Holder" parent="." instance=ExtResource("2_yuufu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0006421916, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.063, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_by7dp")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]

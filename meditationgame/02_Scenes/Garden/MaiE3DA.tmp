@@ -1,0 +1,141 @@
+[gd_scene load_steps=20 format=3 uid="uid://dmyixwun1utuy"]
+
+[ext_resource type="Script" path="res://Scenes/Garden/main_garden.gd" id="1_fsuk5"]
+[ext_resource type="PackedScene" uid="uid://bj7k5rms4bygv" path="res://Scenes/HUD/HUD.tscn" id="2_6fa6n"]
+[ext_resource type="PackedScene" uid="uid://sr4mkvaatyl2" path="res://Scenes/HUD/InventoryHUD.tscn" id="3_54uab"]
+[ext_resource type="PackedScene" uid="uid://md0g30xcmitx" path="res://Objects/Rake/Rake_Active.tscn" id="4_ndesl"]
+[ext_resource type="PackedScene" uid="uid://bjs3v33r83mec" path="res://Objects/Journal/JournalMenu.tscn" id="5_kl2a8"]
+[ext_resource type="PackedScene" uid="uid://c0ss3g41a06hi" path="res://Objects/Building/Building.tscn" id="6_0r6bd"]
+[ext_resource type="PackedScene" uid="uid://chomftf8x1ac8" path="res://Objects/Sand/SandFloor.tscn" id="7_hc5wu"]
+[ext_resource type="PackedScene" uid="uid://dff1nxdonw214" path="res://ArtAssets/Andrew Hirl/Meshes/SM_PrayerBeads_Place_Holder.fbx" id="8_712ms"]
+[ext_resource type="PackedScene" uid="uid://bqlp26fvdiqds" path="res://Objects/Journal/Journal.tscn" id="10_1f7qu"]
+[ext_resource type="PackedScene" uid="uid://d0wnvirlcryub" path="res://Objects/Rake/Rake.tscn" id="11_5psu1"]
+[ext_resource type="PackedScene" uid="uid://deis310phlej3" path="res://Objects/Singing Bowl/SingingBowl.tscn" id="11_q5lqd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_437dt"]
+
+[sub_resource type="Sky" id="Sky_ym75h"]
+sky_material = SubResource("ProceduralSkyMaterial_437dt")
+radiance_size = 2
+
+[sub_resource type="Environment" id="Environment_e0nwy"]
+background_mode = 2
+background_color = Color(0.497474, 0.497474, 0.497474, 1)
+sky = SubResource("Sky_ym75h")
+ambient_light_source = 3
+reflected_light_source = 2
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_xyb2d"]
+frequency = 0.5
+fractal_octaves = 8
+fractal_lacunarity = 3.335
+fractal_gain = 0.905
+domain_warp_enabled = true
+domain_warp_type = 1
+domain_warp_amplitude = 29.37
+domain_warp_frequency = 0.225
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_1dyrb"]
+width = 2048
+height = 2048
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pxh2q"]
+width = 1024
+height = 1024
+as_normal_map = true
+bump_strength = 4.3
+noise = SubResource("FastNoiseLite_xyb2d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8c27r"]
+albedo_color = Color(0.313268, 0.356105, 0.240722, 1)
+albedo_texture = SubResource("NoiseTexture2D_1dyrb")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_pxh2q")
+
+[sub_resource type="QuadMesh" id="QuadMesh_5ikpg"]
+material = SubResource("StandardMaterial3D_8c27r")
+size = Vector2(25, 25)
+orientation = 1
+
+[node name="MainGarden" type="Node3D" node_paths=PackedStringArray("hud", "journal", "inventory_hud", "rake")]
+script = ExtResource("1_fsuk5")
+hud = NodePath("UI_UX/HUD_Game_Select")
+journal = NodePath("UI_UX/JournalMenu")
+inventory_hud = NodePath("UI_UX/HUD_Inventory")
+rake = NodePath("Interactable Menu/Rake")
+
+[node name="Game Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.97437, 0.224951, 0, -0.224951, 0.97437, 0, 1.5, 7.09977)
+cull_mask = 524287
+fov = 60.0
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Lighting"]
+transform = Transform3D(-1, 6.18173e-08, -6.18173e-08, 0, 0.707107, 0.707107, 8.74228e-08, 0.707107, -0.707107, 0, 3.47106, -5.98632)
+light_energy = 1.25
+shadow_enabled = true
+directional_shadow_mode = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting"]
+environment = SubResource("Environment_e0nwy")
+
+[node name="Interactable Menu" type="Node" parent="."]
+
+[node name="SM_PrayerBeads_Place_Holder" parent="Interactable Menu" instance=ExtResource("8_712ms")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.403422, 0.0565856, 5.41723)
+
+[node name="Journal" parent="Interactable Menu" node_paths=PackedStringArray("Journal") instance=ExtResource("10_1f7qu")]
+transform = Transform3D(1.19249e-10, 0, -0.01, 0, 0.01, 0, 0.01, 0, 1.19249e-10, 1.07405, 0.0589847, 5.40567)
+Journal = NodePath("../../UI_UX/JournalMenu")
+
+[node name="Rake" parent="Interactable Menu" instance=ExtResource("11_5psu1")]
+transform = Transform3D(0.00392385, 0, -0.00919801, 0, 0.01, 0, 0.00919801, 0, 0.00392385, -0.301748, 0.0474999, 5.42379)
+
+[node name="SingingBowl" parent="Interactable Menu" instance=ExtResource("11_q5lqd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.03625, 0.0474999, 5.42214)
+
+[node name="UI_UX" type="Node" parent="."]
+
+[node name="HUD_Game_Select" parent="UI_UX" node_paths=PackedStringArray("main") instance=ExtResource("2_6fa6n")]
+main = NodePath("../..")
+
+[node name="HUD_Inventory" parent="UI_UX" node_paths=PackedStringArray("main_garden") instance=ExtResource("3_54uab")]
+visible = false
+main_garden = NodePath("../..")
+
+[node name="HUD_RakeActive" parent="UI_UX" node_paths=PackedStringArray("RakeObject") instance=ExtResource("4_ndesl")]
+visible = false
+RakeObject = NodePath("../../Interactable Menu/Rake")
+
+[node name="JournalMenu" parent="UI_UX" instance=ExtResource("5_kl2a8")]
+visible = false
+
+[node name="Environment" type="Node" parent="."]
+
+[node name="Building" parent="Environment" instance=ExtResource("6_0r6bd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Grass Plane" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.02, -2.08616e-07)
+sorting_offset = -10.0
+sorting_use_aabb_center = false
+mesh = SubResource("QuadMesh_5ikpg")
+skeleton = NodePath("")
+
+[node name="Sand Scene" parent="." instance=ExtResource("7_hc5wu")]
+
+[node name="GameState" type="Node" parent="."]
+
+[node name="Neutral" type="Node" parent="GameState"]
+
+[node name="Rake" type="Node" parent="GameState"]
+
+[node name="Journal" type="Node" parent="GameState"]
+
+[node name="Breathing" type="Node" parent="GameState"]
+
+[node name="Prayer" type="Node" parent="GameState"]
+
+[connection signal="close_journal" from="UI_UX/JournalMenu" to="UI_UX/HUD_Game_Select" method="_on_journal_close"]

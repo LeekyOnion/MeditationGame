@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cj6s5mxl2xdqp"]
+
+[ext_resource type="Texture2D" uid="uid://cidrkovhfpnqu" path="res://00_Art_Assets/Andrew Hirl/2D Sprites/Rock3.png" id="1_n4iar"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0x5h4"]
+size = Vector3(1.285, 0.82, 1.28)
+
+[node name="Tall_Rock" type="StaticBody3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0.38820797, 0)
+billboard = 2
+shaded = true
+texture_filter = 2
+render_priority = 1
+texture = ExtResource("1_n4iar")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4104439, 0)
+shape = SubResource("BoxShape3D_0x5h4")

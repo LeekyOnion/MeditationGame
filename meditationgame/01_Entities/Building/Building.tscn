@@ -1,0 +1,142 @@
+[gd_scene load_steps=15 format=3 uid="uid://c0ss3g41a06hi"]
+
+[ext_resource type="Material" uid="uid://8sdwtb0blj6h" path="res://01_Entities/Building/Bamboo/bld_bamboo.tres" id="1_8qohq"]
+[ext_resource type="PackedScene" uid="uid://prfahmq4o3ep" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_Garden_Wall_Cap.fbx" id="2_nkrgf"]
+[ext_resource type="PackedScene" uid="uid://dawukbqp2g08a" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_Garden_Wall_Corner.fbx" id="3_sbov3"]
+[ext_resource type="PackedScene" uid="uid://dpks8kkpl2ypk" path="res://00_Art_Assets/Andrew Hirl/Meshes/SM_Garden_wall_Straight.fbx" id="4_h33p5"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_1uock"]
+material = ExtResource("1_8qohq")
+size = Vector3(6, 4, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dxu34"]
+points = PackedVector3Array(3, 2, 0.05, 3, 2, -0.05, -3, 2, 0.05, 3, -2, 0.05, 3, -2, -0.05, -3, 2, -0.05, -3, -2, 0.05, -3, -2, -0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6x6gl"]
+lightmap_size_hint = Vector2i(34, 31)
+material = ExtResource("1_8qohq")
+size = Vector3(5, 0.1, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qxkoq"]
+points = PackedVector3Array(-2.5, -0.05, -0.5, -2.5, 0.05, -0.5, 2.5, -0.05, -0.5, -2.5, -0.05, 0.5, -2.5, 0.05, 0.5, 2.5, 0.05, -0.5, 2.5, -0.05, 0.5, 2.5, 0.05, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4y808"]
+material = ExtResource("1_8qohq")
+size = Vector3(1, 0.4, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_621e4"]
+points = PackedVector3Array(-0.5, -0.2, -0.5, -0.5, 0.2, -0.5, 0.5, -0.2, -0.5, -0.5, -0.2, 0.5, -0.5, 0.2, 0.5, 0.5, 0.2, -0.5, 0.5, -0.2, 0.5, 0.5, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_e6mwf"]
+lightmap_size_hint = Vector2i(35, 68)
+material = ExtResource("1_8qohq")
+size = Vector3(6, 4.435, 0.15)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gbfyx"]
+material = ExtResource("1_8qohq")
+size = Vector3(6, 4, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uhg4n"]
+material = ExtResource("1_8qohq")
+size = Vector3(0.1, 3, 4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6eae4"]
+material = ExtResource("1_8qohq")
+size = Vector3(6, 3, 0.1)
+
+[node name="Building" type="Node3D"]
+process_priority = 6
+
+[node name="Floor Component" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Floor Component"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+sorting_use_aabb_center = false
+mesh = SubResource("BoxMesh_1uock")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor Component/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor Component/Floor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_dxu34")
+
+[node name="Patio" type="MeshInstance3D" parent="Floor Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, -2.5)
+mesh = SubResource("BoxMesh_6x6gl")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor Component/Patio"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor Component/Patio/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_qxkoq")
+
+[node name="Step-up Platform" type="MeshInstance3D" parent="Floor Component"]
+transform = Transform3D(-1, 0, -8.74227e-08, 0, 1, 0, 8.74227e-08, 0, -1, -2.5, 0.15, -2.5)
+mesh = SubResource("BoxMesh_4y808")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor Component/Step-up Platform"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor Component/Step-up Platform/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_621e4")
+
+[node name="Roof Component" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -9.505, 0)
+
+[node name="Roof_Curve_1" type="MeshInstance3D" parent="Roof Component"]
+transform = Transform3D(0.999999, 0, 0, 0, 0.573577, -0.819152, 0, 0.819152, 0.573576, 0, 12.75, -1.6)
+sorting_offset = 5.0
+sorting_use_aabb_center = false
+mesh = SubResource("BoxMesh_e6mwf")
+skeleton = NodePath("")
+
+[node name="Roof_Curve_2" type="MeshInstance3D" parent="Roof Component"]
+transform = Transform3D(0.999999, -1.58102e-08, -5.01437e-08, -5.01436e-08, -0.573576, -0.819152, -1.58102e-08, 0.819152, -0.573577, 0, 12.75, 1.6)
+sorting_offset = 10.0
+sorting_use_aabb_center = false
+mesh = SubResource("BoxMesh_e6mwf")
+skeleton = NodePath("")
+
+[node name="Wall Component" type="Node3D" parent="."]
+
+[node name="Ceiling" type="MeshInstance3D" parent="Wall Component"]
+transform = Transform3D(1, 0, 0, 0, 0.00368273, 0.999993, 0, -0.999993, 0.00368273, 0, 2.833, 0)
+sorting_offset = -2.5
+sorting_use_aabb_center = false
+mesh = SubResource("BoxMesh_gbfyx")
+skeleton = NodePath("")
+
+[node name="Wall_R" type="MeshInstance3D" parent="Wall Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.05, 1.385, 0)
+mesh = SubResource("BoxMesh_uhg4n")
+skeleton = NodePath("../../Floor Component")
+
+[node name="Wall_L" type="MeshInstance3D" parent="Wall Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.05, 1.385, 0)
+mesh = SubResource("BoxMesh_uhg4n")
+skeleton = NodePath("../../Floor Component")
+
+[node name="Wall_B" type="MeshInstance3D" parent="Wall Component"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
+mesh = SubResource("BoxMesh_6eae4")
+
+[node name="SM_Garden_Wall_Cap" parent="." instance=ExtResource("2_nkrgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.39484, 9.53674e-07, -4.05019)
+
+[node name="SM_Garden_Wall_Corner" parent="." instance=ExtResource("3_sbov3")]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 5.39484, 9.53674e-07, -12.0502)
+
+[node name="SM_Garden_wall_Straight" parent="." instance=ExtResource("4_h33p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.39484, 9.53674e-07, -12.0502)
+
+[node name="SM_Garden_Wall_Corner2" parent="." instance=ExtResource("3_sbov3")]
+transform = Transform3D(-4.37114e-08, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.37114e-08, -4.18752, 9.53674e-07, -13.6993)
+
+[node name="SM_Garden_wall_Straight2" parent="." instance=ExtResource("4_h33p5")]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 3.80526, 9.53674e-07, -13.7038)
+
+[node name="SM_Garden_wall_Straight3" parent="." instance=ExtResource("4_h33p5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84081, 9.53674e-07, -12.1127)
+
+[node name="SM_Garden_Wall_Cap2" parent="." instance=ExtResource("2_nkrgf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.84089, 9.53674e-07, -4.12233)

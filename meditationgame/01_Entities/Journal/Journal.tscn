@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqlp26fvdiqds"]
+
+[ext_resource type="Script" uid="uid://cty18rwykeciy" path="res://01_Entities/Journal/journal_controller.gd" id="1_1vwwp"]
+[ext_resource type="PackedScene" uid="uid://dvf1yl11cik0w" path="res://01_Entities/Journal/SM_Journal_Place_Holder.fbx" id="2_ja7ls"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_74bdt"]
+size = Vector3(0.22, 0.025, 0.15)
+
+[node name="Journal" type="Node3D"]
+script = ExtResource("1_1vwwp")
+
+[node name="SM_Journal_Place_Holder" parent="." instance=ExtResource("2_ja7ls")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0074432623, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0013868064, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.013868071, 0)
+shape = SubResource("BoxShape3D_74bdt")
+
+[connection signal="input_event" from="StaticBody3D" to="." method="_on_static_body_3d_input_event"]
